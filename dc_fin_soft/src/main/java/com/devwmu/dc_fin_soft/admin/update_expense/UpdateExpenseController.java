@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin/update_expense")
 public class UpdateExpenseController {
-    @PutMapping("/started_buying_expense")
+    @PutMapping("/started_buying_expense/{id}")
     public StartedBuyingExpense startedBuyingExpense(){
         // startedBuyingExpense(ExpenseID, decision) bool
         //     Toggling started buying in the expense table
@@ -15,7 +15,7 @@ public class UpdateExpenseController {
         return new StartedBuyingExpense();
     }
 
-    @PutMapping("/requested_expense")
+    @PutMapping("/requested_expense/{id}")
     public RequestedExpense requestedExpense(){
         // requestedExpense(ExpenseID, decision) bool
         //     Toggling started buying in the expense table
@@ -24,7 +24,7 @@ public class UpdateExpenseController {
         return new RequestedExpense();
     }
 
-    @PutMapping("/finished_buying_expense")
+    @PutMapping("/finished_buying_expense/{id}")
     public FinishedBuyingExpense finishedBuyingExpense(){
         // finishedBuyingExpense(ExpenseID, decision) bool
         //     Toggling finishedBuying in the expense table
@@ -33,7 +33,7 @@ public class UpdateExpenseController {
         return new FinishedBuyingExpense();
     }
 
-    @PutMapping("/picked_up")
+    @PutMapping("/picked_up/{id}")
     public PickedUp pickedUp(){
         // pickedUp(ExpenseID, decision): bool
         //     Toggling picked up in the expense table

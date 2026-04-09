@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin/approvals")
 public class ApprovalsController {
-    @PutMapping("/approve_request")
+    @PutMapping("/request/{id}")
     public ApproveRequest approveRequest(){
         // approveRequest(id, decision) bool: 
         //     will mark a request as approved/disapproved in the club requests table
@@ -15,7 +15,7 @@ public class ApprovalsController {
         return new ApproveRequest();
     }
 
-    @PutMapping("/approve_expense")
+    @PutMapping("/expense/{id}")
     public ApproveExpense approveExpense(){
         // approveExpense(ExpenseID, decision) bool
         //     Toggling approve in the expense table

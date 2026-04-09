@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin/reimbursements")
 public class ReimbursementController {
-    @PostMapping("/add_receipt")
+    @PostMapping("/receipt")
     public AddReceipt addReceipt(){
         // addReceipt(imgFile) success
         //     Adds a receipt to the Google Drive
@@ -15,7 +15,7 @@ public class ReimbursementController {
         return new AddReceipt();
     }
 
-    @PutMapping("/reimbursed")
+    @PutMapping("/reimbursed/{id}")
     public Reimbursed reimbursed(){
         // reimbursed(ExpenseID, decision) bool
         //     Toggling reimbursed in the expense table

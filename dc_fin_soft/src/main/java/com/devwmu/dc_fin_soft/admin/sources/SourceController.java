@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin/sources")
 public class SourceController {
-    @PostMapping("/create_source")
+    @PostMapping("/source")
     public CreateSource createSource(){
         // createSource(name, cap, type, internal): bool
         //     Adds a source to the source database
@@ -15,7 +15,7 @@ public class SourceController {
         return new CreateSource();
     }
 
-    @PutMapping("/edit_source")
+    @PutMapping("/source/{id}")
     public EditSource editSource(){
         // editSource((id, editArray[]): bool
         //     Edits columns of a source
@@ -24,7 +24,7 @@ public class SourceController {
         return new EditSource();
     }
 
-    @DeleteMapping("/delete_source")
+    @DeleteMapping("/source/{id}")
     public DeleteSource deleteSource(){
         // deleteSource(sourceID): bool
         //     Deletes a source from the database

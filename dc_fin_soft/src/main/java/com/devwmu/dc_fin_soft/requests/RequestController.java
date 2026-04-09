@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/requests")
 public class RequestController {
-    @GetMapping("/filter_requests")
+    @GetMapping("/requests/search")
     public FilterRequests filterRequests(){
         // filterRequests(filterArray[]) ? 
         //     Take an array of column names and desired values, and output the selected SQL rows
@@ -16,7 +16,7 @@ public class RequestController {
         return new FilterRequests();
     }
 
-    @PostMapping("/create_request")
+    @PostMapping("/request")
     public CreateRequest createRequest(){
         // createRequest(name, community, username, itemName, quantity, pricePerUnit, deadline, purpose): bool
         //     Creates a new entry in the club requests table
@@ -25,7 +25,7 @@ public class RequestController {
         return new CreateRequest();
     }
 
-    @PutMapping("/edit_request")
+    @PutMapping("/request/{id}")
     public EditRequest editRequest(){
         // editRequest(id, editArray[]): bool
         //     The id of the request and the array of columns to be changed
@@ -34,7 +34,7 @@ public class RequestController {
         return new EditRequest();
     }
 
-    @DeleteMapping("/delete_request")
+    @DeleteMapping("/request{id}")
     public DeleteRequest deleteRequest(){
         // deleteRequest(id): bool
         //     The id of the request to be deleted (will just set deleted to 0)

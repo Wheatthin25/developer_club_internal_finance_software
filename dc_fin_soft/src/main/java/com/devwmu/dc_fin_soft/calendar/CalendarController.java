@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/calendar")
 public class CalendarController {
-    @GetMapping("/filter_calendar_events")
+    @GetMapping("/calendar_events/search")
     public FilterCalendarEvents filterCalendarEvents(){
         // filterCalendarEvents(filterArray[]) ???
         //     Take an array of column names and desired values, and output the selected SQL rows
@@ -15,7 +15,7 @@ public class CalendarController {
         return new FilterCalendarEvents();
     }
 
-    @PostMapping("/create_calendar_event")
+    @PostMapping("/calendar_event")
     public CreateCalendarEvent createCalendarEvent(){
         // createCalendarEvent(name, location, start, end, creator, group, category): success
         //     Uses the input info to enter a calendar event into the database
@@ -24,7 +24,7 @@ public class CalendarController {
         return new CreateCalendarEvent();
     }
 
-    @PutMapping("/edit_calendar_event")
+    @PutMapping("/calendar_event/{id}")
     public EditCalendarEvent editCalendarEvent(){
         // editCalendarEvent(id, editArray[]): success
         //     The ID of the calendar event and the array of columns to be changed
@@ -33,7 +33,7 @@ public class CalendarController {
         return new EditCalendarEvent();
     }
 
-    @DeleteMapping("/delete_calendar_event")
+    @DeleteMapping("/calendar_event/{id}")
     public DeleteCalendarEvent deleteCalendarEvent(){
         // deleteCalendarEvent(id): success
         //     The id of the calendar event to be deleted (from display, not database)

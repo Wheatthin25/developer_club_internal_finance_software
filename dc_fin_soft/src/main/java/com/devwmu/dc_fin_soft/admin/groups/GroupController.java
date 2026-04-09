@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/admin/groups")
 public class GroupController {
-    @GetMapping("/filter_finance_groups")
+    @GetMapping("/finance_groups/search")
     public FilterFinanceGroups filterFinanceGroups(){
     // filterFinanceGroups(filterArray[]): Group (?? data type)	
         //     Filters through the finance groups based on array specs
@@ -15,7 +15,7 @@ public class GroupController {
         return new FilterFinanceGroups();
     }
 
-    @PostMapping("/add_user_to_group")
+    @PostMapping("/finance_group_users/{user}")
     public AddUserToGroup addUserToGroup(){
         // addUserToGroup(user, group): bool
         //     Adds a specific user to a group
@@ -24,7 +24,7 @@ public class GroupController {
         return new AddUserToGroup();
     }
 
-    @DeleteMapping("/remove_user_from_group")
+    @DeleteMapping("/finance_group_users/{user}")
     public RemoveUserFromGroup removeUserFromGroup(){
         // removeUserFromGroup(user, group): bool
         //     Removes a specific user from a group
@@ -33,7 +33,7 @@ public class GroupController {
         return new RemoveUserFromGroup();
     }
 
-    @PostMapping("/create_group")
+    @PostMapping("/finance_group")
     public CreateGroup createGroup(){
         // createGroup(name): bool
         //     Creates a new finance group
@@ -42,7 +42,7 @@ public class GroupController {
         return new CreateGroup();
     }
 
-    @DeleteMapping("/remove_group")
+    @DeleteMapping("/finance_group/{id}")
     public RemoveGroup removeGroup(){
         // removeGroup(name): bool
         //     removes a group by its name

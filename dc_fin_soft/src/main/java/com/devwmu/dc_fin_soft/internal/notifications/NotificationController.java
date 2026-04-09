@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/internal/notifications")
 public class NotificationController {
-    @PostMapping("/new_request_notify")
+    @PostMapping("/new_request")
     public NewRequestNotify newRequestNotify(){
         // newRequestNotify(RequestID, email(s)): bool
         //     Sends a notification to the admin of the dev club about a new request
@@ -15,7 +15,7 @@ public class NotificationController {
         return new NewRequestNotify();
     }
 
-    @PostMapping("/request_status_updated_notify")
+    @PostMapping("/request_status_updated")
     public RequestStatusUpdatedNotify requestStatusUpdatedNotify(){
         // requestStatusUpdatedNotify(requestID, update): bool
         //     Updates the requestee on the request that there has been a change to their request (and what the change is)
@@ -24,7 +24,7 @@ public class NotificationController {
         return new RequestStatusUpdatedNotify();
     }
 
-    @PostMapping("/reimbursement_deadline_soon_notify")
+    @PostMapping("/reimbursement_deadline_soon")
     public ReimbursementDeadlineSoonNotify reimbursementDeadlineSoonNotify(){
         // reimbursementDeadlineSoonNotify(): bool
         //     Sends a notification to the dev club admin if the reimbursement deadline is approaching
@@ -33,7 +33,7 @@ public class NotificationController {
         return new ReimbursementDeadlineSoonNotify();
     }
 
-    @PostMapping("/deliberation_deadline_soon_notify")
+    @PostMapping("/deliberation_deadline_soon")
     public DeliberationDeadlineSoonNotify deliberationDeadlineSoonNotify(){
         // deliberationDeadlineSoonNotify(): bool
         //     Sends a notification to the dev club admin if the deliberation deadline is approaching
@@ -42,7 +42,7 @@ public class NotificationController {
         return new DeliberationDeadlineSoonNotify();
     }
 
-    @PostMapping("/item_deadline_soon_notify")
+    @PostMapping("/item_deadline_soon")
     public ItemDeadlineSoonNotify itemDeadlineSoonNotify(){
         // itemDeadlineSoonNotify(): bool
         //     Sends a notification to the dev club admin if the item deadline is approaching
@@ -51,7 +51,7 @@ public class NotificationController {
         return new ItemDeadlineSoonNotify();
     }
 
-    @PostMapping("/allocate_deadline_soon_notify")
+    @PostMapping("/allocate_deadline_soon")
     public AllocateDeadlineSoonNotify allocateDeadlineSoonNotify(){
         // allocateDeadlineSoonNotify(): bool
         //     Sends a notification to the dev club admin if the allocation deadline is approaching

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/expense")
 public class ExpenseController {
-    @GetMapping("/filter_sources")
+    @GetMapping("/sources/search")
     public FilterSources filterSources(@RequestParam String[] filterArray) {
         // filterSources(filterArray[]) ?
         //      Take an array of column names and desired values, and output the selected SQL rows
@@ -15,7 +15,7 @@ public class ExpenseController {
         return new FilterSources();
     }
 
-    @GetMapping("/filter_expenses")
+    @GetMapping("/expenses/search")
     public FilterExpenses filterExpenses(@RequestParam String[] filterArray){
         // filterExpenses(filterArray[]) ?
         //     Take an array of column names and the desired value, and output the selected SQL rows
@@ -24,7 +24,7 @@ public class ExpenseController {
         return new FilterExpenses();
     }
 
-    @PostMapping("/budget_item")
+    @PostMapping("/item")
     public BudgetItem budgetItem(){
         // budgetItem(name, qty, pricePerUnit, totalPrice, purpose, vendor, foodFlag, eventID, source, link, deadline, community, payment_type, pickup_location) bool
         //     Takes in info to create an entry in the Expenses table and outputs if successful
@@ -33,7 +33,7 @@ public class ExpenseController {
         return new BudgetItem();
     }
 
-    @PutMapping("/edit_item")
+    @PutMapping("/item/{id}")
     public EditItem editItem(){
         // editItem(id, editArray[]): bool
         //     The ID of the item and the array of columns to be changed
@@ -42,7 +42,7 @@ public class ExpenseController {
         return new EditItem();
     }
 
-    @DeleteMapping("/delete_item")
+    @DeleteMapping("/item{id}")
     public DeleteItem deleteItem() {
         // deleteItem(id): bool
         //     The id of the item to be deleted (from display, not database)
@@ -51,7 +51,7 @@ public class ExpenseController {
         return new DeleteItem();
     }
 
-    @PostMapping("/create_operational_allocation_form")
+    @PostMapping("/operational_allocation_form")
     public CreateOperationalAllocationForm createOperationalAllocationForm(){
         // createOperationalAllocationForm(ExpenseID): bool
         //     Generate an operational allocation request form

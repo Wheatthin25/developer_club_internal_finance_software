@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/internal/recommendations")
 public class RecommendationController {
-    @GetMapping("/calculate_recommended_total_price")
+    @GetMapping("/total_price")
     public CalculateRecommendedTotalPrice calculateRecommendedTotalPrice(){
         // calcRecommendedTotalPrice(qty, pricePerUnit) double
         //     Calculating total price
@@ -15,7 +15,7 @@ public class RecommendationController {
         return new CalculateRecommendedTotalPrice();
     }
 
-    @GetMapping("/calculate_recommended_source")
+    @GetMapping("/source")
     public CalculateRecommendedSource calculateRecommendedSource(){
         // calcRecommendedSource(totalPrice, type, curDate) str
         //     Recommends a source
