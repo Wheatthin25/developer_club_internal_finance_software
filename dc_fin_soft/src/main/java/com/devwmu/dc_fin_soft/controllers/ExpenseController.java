@@ -2,22 +2,12 @@ package com.devwmu.dc_fin_soft.controllers;
 import org.springframework.web.bind.annotation.*;
 
 import com.devwmu.dc_fin_soft.entities.Expense;
-import com.devwmu.dc_fin_soft.entities.Source;
 
 // Fix outputs and inputs
 
 @RestController
 @RequestMapping("/expense")
 public class ExpenseController {
-    @GetMapping("/sources/search")
-    public Source filterSources(@RequestParam String[] filterArray) {
-        // filterSources(filterArray[]) ?
-        //      Take an array of column names and desired values, and output the selected SQL rows
-        //      OUTPUT: sources
-
-        return new Source();
-    }
-
     @GetMapping("/expenses/search")
     public Expense filterExpenses(@RequestParam String[] filterArray){
         // filterExpenses(filterArray[]) ?
@@ -58,6 +48,120 @@ public class ExpenseController {
     public Expense createOperationalAllocationForm(){
         // createOperationalAllocationForm(ExpenseID): bool
         //     Generate an operational allocation request form
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+        @PutMapping("/started_buying_expense/{id}")
+    public Expense startedBuyingExpense(){
+        // startedBuyingExpense(ExpenseID, decision) bool
+        //     Toggling started buying in the expense table
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+    @PutMapping("/requested_expense/{id}")
+    public Expense requestedExpense(){
+        // requestedExpense(ExpenseID, decision) bool
+        //     Toggling started buying in the expense table
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+    @PutMapping("/finished_buying_expense/{id}")
+    public Expense finishedBuyingExpense(){
+        // finishedBuyingExpense(ExpenseID, decision) bool
+        //     Toggling finishedBuying in the expense table
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+    @PutMapping("/picked_up/{id}")
+    public Expense pickedUp(){
+        // pickedUp(ExpenseID, decision): bool
+        //     Toggling picked up in the expense table
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+    @PutMapping("/expense/{id}")
+    public Expense approveExpense(){
+        // approveExpense(ExpenseID, decision) bool
+        //     Toggling approve in the expense table
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+    @PostMapping("/allocation_not_spent")
+    public Expense allocationNotSpentAlert(){
+        // allocationNotSpentAlert(expenseID) success
+        //     Sends an alert to the dev club admin if [CONDITION] 
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+    @PostMapping("/food_budget_too_high")
+    public Expense foodBudgetTooHighAlert(){
+        // foodBudgetTooHighAlert(expenseID) success
+        //     Sends an alert to the dev club admin if the food budget is greater than 20 dollars per estimated attendee
+        //     OUTPUT: success or not
+        return new Expense();
+    }
+
+    @PostMapping("/allocation_too_big")
+    public Expense allocationTooBigAlert(){
+        // allocationTooBigAlert(expenseID) success
+        //     Sends an alert to the dev club admin if the allocation is too big for the amount of money in the source
+        //     OUTPUT: success or not
+        return new Expense();
+    }
+
+    @PostMapping("/deadline_past")
+    public Expense deadlinePastAlert(){
+        // deadlinePastAlert(expenseID) success
+        //     Sends an alert to the dev club admin if the deadline for an item is in the past
+        //     OUTPUT: success or not
+        return new Expense();
+    }
+
+    @GetMapping("/total_price")
+    public Expense calculateRecommendedTotalPrice(){
+        // calcRecommendedTotalPrice(qty, pricePerUnit) double
+        //     Calculating total price
+        //     OUTPUT: recommended total price
+
+        return new Expense();
+    }
+
+    @GetMapping("/source")
+    public Expense calculateRecommendedSource(){
+        // calcRecommendedSource(totalPrice, type, curDate) str
+        //     Recommends a source
+        //     OUTPUT: recommended source
+
+        return new Expense();
+    }
+
+    @PostMapping("/receipt")
+    public Expense addReceipt(){
+        // addReceipt(imgFile) success
+        //     Adds a receipt to the Google Drive
+        //     OUTPUT: success or not
+
+        return new Expense();
+    }
+
+    @PutMapping("/reimbursed/{id}")
+    public Expense reimbursed(){
+        // reimbursed(ExpenseID, decision) bool
+        //     Toggling reimbursed in the expense table
         //     OUTPUT: success or not
 
         return new Expense();

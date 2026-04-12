@@ -7,7 +7,7 @@ import com.devwmu.dc_fin_soft.entities.FinanceGroup;
 
 @RestController
 @RequestMapping("/admin/groups")
-public class GroupController {
+public class FinanceGroupController {
     @GetMapping("/finance_groups/search")
     public FinanceGroup filterFinanceGroups(){
     // filterFinanceGroups(filterArray[]): Group (?? data type)	

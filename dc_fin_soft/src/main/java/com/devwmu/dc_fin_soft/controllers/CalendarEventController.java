@@ -5,9 +5,12 @@ import com.devwmu.dc_fin_soft.entities.CalendarEvent;
 
 // Fix outputs and inputs
 
+// @PreAuthorize("hasRole('ADMIN')) to check role of the user
+// when they log in, assign/check role
+
 @RestController
 @RequestMapping("/calendar")
-public class CalendarController {
+public class CalendarEventController {
     @GetMapping("/calendar_events/search")
     public CalendarEvent filterCalendarEvents(){
         // filterCalendarEvents(filterArray[]) ???
@@ -39,6 +42,42 @@ public class CalendarController {
     public CalendarEvent deleteCalendarEvent(){
         // deleteCalendarEvent(id): success
         //     The id of the calendar event to be deleted (from display, not database)
+        //     OUTPUT: success or not
+
+        return new CalendarEvent();
+    }
+
+    @PostMapping("/reimbursement_deadline_soon")
+    public CalendarEvent reimbursementDeadlineSoonNotify(){
+        // reimbursementDeadlineSoonNotify(): bool
+        //     Sends a notification to the dev club admin if the reimbursement deadline is approaching
+        //     OUTPUT: success or not
+
+        return new CalendarEvent();
+    }
+
+    @PostMapping("/deliberation_deadline_soon")
+    public CalendarEvent deliberationDeadlineSoonNotify(){
+        // deliberationDeadlineSoonNotify(): bool
+        //     Sends a notification to the dev club admin if the deliberation deadline is approaching
+        //     OUTPUT: success or not
+
+        return new CalendarEvent();
+    }
+
+    @PostMapping("/item_deadline_soon")
+    public CalendarEvent itemDeadlineSoonNotify(){
+        // itemDeadlineSoonNotify(): bool
+        //     Sends a notification to the dev club admin if the item deadline is approaching
+        //     OUTPUT: success or not
+
+        return new CalendarEvent();
+    }
+
+    @PostMapping("/allocate_deadline_soon")
+    public CalendarEvent allocateDeadlineSoonNotify(){
+        // allocateDeadlineSoonNotify(): bool
+        //     Sends a notification to the dev club admin if the allocation deadline is approaching
         //     OUTPUT: success or not
 
         return new CalendarEvent();

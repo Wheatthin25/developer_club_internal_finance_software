@@ -9,6 +9,16 @@ import com.devwmu.dc_fin_soft.entities.Source;
 @RestController
 @RequestMapping("/admin/sources")
 public class SourceController {
+
+    @GetMapping("/sources/search")
+    public Source filterSources(@RequestParam String[] filterArray) {
+        // filterSources(filterArray[]) ?
+        //      Take an array of column names and desired values, and output the selected SQL rows
+        //      OUTPUT: sources
+
+        return new Source();
+    }
+
     @PostMapping("/source")
     public Source createSource(){
         // createSource(name, cap, type, internal): bool

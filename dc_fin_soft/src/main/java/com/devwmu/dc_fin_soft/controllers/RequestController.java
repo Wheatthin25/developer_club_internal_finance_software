@@ -44,4 +44,32 @@ public class RequestController {
 
         return new Request();
     }
+
+
+    @PutMapping("/request/{id}")
+    public Request approveRequest(){
+        // approveRequest(id, decision) bool: 
+        //     will mark a request as approved/disapproved in the club requests table
+        //     OUTPUT: success or not
+
+        return new Request();
+    }
+
+    @PostMapping("/new_request")
+    public Request newRequestNotify(){
+        // newRequestNotify(RequestID, email(s)): bool
+        //     Sends a notification to the admin of the dev club about a new request
+        //     OUTPUT: success or not
+
+        return new Request();
+    }
+
+    @PostMapping("/request_status_updated")
+    public Request requestStatusUpdatedNotify(){
+        // requestStatusUpdatedNotify(requestID, update): bool
+        //     Updates the requestee on the request that there has been a change to their request (and what the change is)
+        //     OUTPUT: success or not
+
+        return new Request();
+    }
 }
