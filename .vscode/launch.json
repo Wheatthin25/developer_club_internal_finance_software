@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-DcFinSoftApplication<dc_fin_soft>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.devwmu.dc_fin_soft.DcFinSoftApplication",
+            "projectName": "dc_fin_soft",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
