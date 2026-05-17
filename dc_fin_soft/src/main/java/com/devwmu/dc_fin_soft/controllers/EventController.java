@@ -26,7 +26,7 @@ public class EventController {
         return new Event();
     }
 
-    @PutMapping("/event/{id}")
+    @PutMapping("/event/edit_{id}")
     public Event editEvent(){
         // editEvent(id, editArray[]): bool
         //     The ID of the event and the array of columns to be changed
@@ -35,7 +35,7 @@ public class EventController {
         return new Event();
     }
 
-    @DeleteMapping("/event/{id}")
+    @DeleteMapping("/event/delete_{id}")
     public Event deleteEvent(){
         // deleteEvent(id): bool
         //     The id of the item to be deleted (from display, not database)

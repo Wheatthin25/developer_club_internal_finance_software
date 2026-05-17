@@ -1,6 +1,6 @@
 package com.devwmu.dc_fin_soft.controllers;
 import org.springframework.web.bind.annotation.*;
-
+import com.devwmu.dc_fin_soft.repositories.SourceRepository;
 import com.devwmu.dc_fin_soft.entities.Source;
 
 
@@ -9,6 +9,17 @@ import com.devwmu.dc_fin_soft.entities.Source;
 @RestController
 @RequestMapping("/admin/sources")
 public class SourceController {
+    private final SourceRepository sourceRepository;
+
+    public SourceController(final SourceRepository sourceRepository) {
+    this.sourceRepository = sourceRepository;
+  }
+    @GetMapping("/sources")
+    public Iterable<Source> getAllSources() {   
+        //      OUTPUT: all of the sources
+
+        return this.sourceRepository.findAll();
+    }
 
     @GetMapping("/sources/search")
     public Source filterSources(@RequestParam String[] filterArray) {
@@ -28,7 +39,7 @@ public class SourceController {
         return new Source();
     }
 
-    @PutMapping("/source/{id}")
+    @PutMapping("/source/edit_{id}")
     public Source editSource(){
         // editSource((id, editArray[]): bool
         //     Edits columns of a source
@@ -37,7 +48,7 @@ public class SourceController {
         return new Source();
     }
 
-    @DeleteMapping("/source/{id}")
+    @DeleteMapping("/source/delete_{id}")
     public Source deleteSource(){
         // deleteSource(sourceID): bool
         //     Deletes a source from the database

@@ -27,7 +27,7 @@ public class RequestController {
         return new Request();
     }
 
-    @PutMapping("/request/{id}")
+    @PutMapping("/request/edit_{id}")
     public Request editRequest(){
         // editRequest(id, editArray[]): bool
         //     The id of the request and the array of columns to be changed
@@ -36,7 +36,7 @@ public class RequestController {
         return new Request();
     }
 
-    @DeleteMapping("/request{id}")
+    @DeleteMapping("/request/delete_{id}")
     public Request deleteRequest(){
         // deleteRequest(id): bool
         //     The id of the request to be deleted (will just set deleted to 0)
@@ -46,7 +46,7 @@ public class RequestController {
     }
 
 
-    @PutMapping("/request/{id}")
+    @PutMapping("/request/approve_{id}")
     public Request approveRequest(){
         // approveRequest(id, decision) bool: 
         //     will mark a request as approved/disapproved in the club requests table

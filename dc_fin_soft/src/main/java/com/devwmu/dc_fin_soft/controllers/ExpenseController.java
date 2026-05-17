@@ -26,7 +26,7 @@ public class ExpenseController {
         return new Expense();
     }
 
-    @PutMapping("/item/{id}")
+    @PutMapping("/item/edit_{id}")
     public Expense editItem(){
         // editItem(id, editArray[]): bool
         //     The ID of the item and the array of columns to be changed
@@ -35,7 +35,7 @@ public class ExpenseController {
         return new Expense();
     }
 
-    @DeleteMapping("/item{id}")
+    @DeleteMapping("/item/delete_{id}")
     public Expense deleteItem() {
         // deleteItem(id): bool
         //     The id of the item to be deleted (from display, not database)

@@ -29,7 +29,7 @@ public class CalendarEventController {
         return new CalendarEvent();
     }
 
-    @PutMapping("/calendar_event/{id}")
+    @PutMapping("/calendar_event/edit_{id}")
     public CalendarEvent editCalendarEvent(){
         // editCalendarEvent(id, editArray[]): success
         //     The ID of the calendar event and the array of columns to be changed
@@ -38,7 +38,7 @@ public class CalendarEventController {
         return new CalendarEvent();
     }
 
-    @DeleteMapping("/calendar_event/{id}")
+    @DeleteMapping("/calendar_event/delete_{id}")
     public CalendarEvent deleteCalendarEvent(){
         // deleteCalendarEvent(id): success
         //     The id of the calendar event to be deleted (from display, not database)
