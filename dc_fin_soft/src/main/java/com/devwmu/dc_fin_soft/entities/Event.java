@@ -1,8 +1,10 @@
 package com.devwmu.dc_fin_soft.entities;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Event")
+@Table(name = "EventFin")
 public class Event {
         // initalization
     @Id
@@ -13,7 +15,7 @@ public class Event {
     private String name;
 
     @Column(name ="date")
-    private String date;
+    private LocalDateTime date;
 
     @Column(name ="location")
     private String location;
@@ -43,7 +45,7 @@ public class Event {
         return this.name;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
@@ -77,7 +79,7 @@ public class Event {
         this.name = name;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

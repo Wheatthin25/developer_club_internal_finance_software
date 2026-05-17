@@ -1,8 +1,10 @@
 package com.devwmu.dc_fin_soft.entities;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Club_Request")
+@Table(name = "ClubRequests")
 public class Request {
     
     // initalization
@@ -29,7 +31,7 @@ public class Request {
     private Float price_per_unit;
 
     @Column(name ="deadline")
-    private String deadline;
+    private LocalDateTime deadline;
 
     @Column(name ="purpose")
     private String purpose;
@@ -67,7 +69,7 @@ public class Request {
         return this.price_per_unit;
     }
 
-    public String getDeadline() {
+    public LocalDateTime getDeadline() {
         return this.deadline;
     }
 
@@ -105,7 +107,7 @@ public class Request {
         this.price_per_unit = price_per_unit;
     }
 
-    public void setDeadline(String deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

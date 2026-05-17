@@ -1,5 +1,6 @@
 package com.devwmu.dc_fin_soft.entities;
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Calendar")
@@ -17,10 +18,10 @@ public class CalendarEvent {
     private String location;
 
     @Column(name ="start_date_time")
-    private String start_date_time;
+    private LocalDateTime start_date_time;
 
     @Column(name ="end_date_time")
-    private String end_date_time;
+    private LocalDateTime end_date_time;
 
     @Column(name ="creator")
     private Integer creator;
@@ -48,11 +49,11 @@ public class CalendarEvent {
         return this.location;
     }
 
-    public String getStateDateTime(){
+    public LocalDateTime getStateDateTime(){
         return this.start_date_time;
     }
 
-    public String getEndDateTime(){
+    public LocalDateTime getEndDateTime(){
         return this.end_date_time;
     }
 
@@ -82,11 +83,11 @@ public class CalendarEvent {
         this.location = location;
     }
 
-    public void setStateDateTime(String start_date_time){
+    public void setStateDateTime(LocalDateTime start_date_time){
         this.start_date_time = start_date_time;
     }
 
-    public void setEndDateTime(String end_date_time){
+    public void setEndDateTime(LocalDateTime end_date_time){
         this.end_date_time = end_date_time;
     }
 

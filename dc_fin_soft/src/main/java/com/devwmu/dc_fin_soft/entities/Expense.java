@@ -1,8 +1,10 @@
 package com.devwmu.dc_fin_soft.entities;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Expense")
+@Table(name = "Expenses")
 public class Expense {
     
     // initalization
@@ -38,7 +40,7 @@ public class Expense {
     private String link;
 
     @Column(name ="item_deadline")
-    private String item_deadline;
+    private LocalDateTime item_deadline;
 
     @Column(name ="community")
     private Integer community;
@@ -74,13 +76,13 @@ public class Expense {
     private String pickup_location;
 
     @Column(name ="allocation_deadline")
-    private String allocation_deadline;
+    private LocalDateTime allocation_deadline;
 
     @Column(name ="deliberation_deadline")
-    private String deliberation_deadline;
+    private LocalDateTime deliberation_deadline;
 
     @Column(name ="reimbursement_deadline")
-    private String reimbursement_deadline;
+    private LocalDateTime reimbursement_deadline;
 
     @Column(name ="payment_type")
     private String payment_type;
@@ -125,7 +127,7 @@ public class Expense {
         return this.link;
     }
 
-    public String getItemDeadline() {
+    public LocalDateTime getItemDeadline() {
         return this.item_deadline;
     }
 
@@ -173,15 +175,15 @@ public class Expense {
         return this.pickup_location;
     }
 
-    public String getAllocationDeadline() {
+    public LocalDateTime getAllocationDeadline() {
         return this.allocation_deadline;
     }
 
-    public String getDeliberationDeadline() {
+    public LocalDateTime getDeliberationDeadline() {
         return this.deliberation_deadline;
     }
 
-    public String getReimbursementDeadline() {
+    public LocalDateTime getReimbursementDeadline() {
         return this.reimbursement_deadline;
     }
 
@@ -230,7 +232,7 @@ public class Expense {
         this.link = link;
     }
 
-    public void setItemDeadline(String item_deadline) {
+    public void setItemDeadline(LocalDateTime item_deadline) {
         this.item_deadline = item_deadline;
     }
 
@@ -278,15 +280,15 @@ public class Expense {
         this.pickup_location = pickup_location;
     }
 
-    public void setAllocationDeadline(String allocation_deadline) {
+    public void setAllocationDeadline(LocalDateTime allocation_deadline) {
         this.allocation_deadline = allocation_deadline;
     }
 
-    public void setDeliberationDeadline(String deliberation_deadline) {
+    public void setDeliberationDeadline(LocalDateTime deliberation_deadline) {
         this.deliberation_deadline = deliberation_deadline;
     }
 
-    public void setReimbursementDeadline(String reimbursement_deadline) {
+    public void setReimbursementDeadline(LocalDateTime reimbursement_deadline) {
         this.reimbursement_deadline = reimbursement_deadline;
     }
 
