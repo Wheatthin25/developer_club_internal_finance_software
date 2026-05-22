@@ -7,7 +7,7 @@ public class FinanceGroup {
         // initalization
     @Id
     @GeneratedValue
-    private Integer id;
+    private String id;
 
     @Column(name ="title")
     private String title;
@@ -17,7 +17,7 @@ public class FinanceGroup {
 
 
     // getters
-    public Integer getId(){
+    public String getId(){
         return this.id;
     }
 

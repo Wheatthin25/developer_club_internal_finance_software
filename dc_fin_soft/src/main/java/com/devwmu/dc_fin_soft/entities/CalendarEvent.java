@@ -24,10 +24,10 @@ public class CalendarEvent {
     private LocalDateTime end_date_time;
 
     @Column(name ="creator")
-    private Integer creator;
+    private String creator;
 
     @Column(name ="group_id")
-    private Integer group_id;
+    private String group_id;
 
     @Column(name ="category")
     private Integer category;
@@ -57,11 +57,11 @@ public class CalendarEvent {
         return this.end_date_time;
     }
 
-    public Integer getCreator(){
+    public String getCreator(){
         return this.creator;
     }
 
-    public Integer getGroupId(){
+    public String getGroupId(){
         return this.group_id;
     }
 
@@ -91,11 +91,11 @@ public class CalendarEvent {
         this.end_date_time = end_date_time;
     }
 
-    public void setCreator(Integer creator){
+    public void setCreator(String creator){
         this.creator = creator;
     }
 
-    public void setGroupId(Integer group_id){
+    public void setGroupId(String group_id){
         this.group_id = group_id;
     }
 
