@@ -1,5 +1,6 @@
 package com.devwmu.dc_fin_soft.entities;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Source")
@@ -16,19 +17,19 @@ public class Source {
     private String type;
 
     @Column(name ="internal")
-    private String internal;
+    private Integer internal;
 
     @Column(name ="money_cap")
-    private String money_cap;
+    private BigDecimal money_cap;
 
     @Column(name ="spent")
-    private Integer spent;
+    private BigDecimal spent;
 
     @Column(name ="budgeted")
-    private Integer budgeted;
+    private BigDecimal budgeted;
 
     @Column(name ="available")
-    private Integer available;
+    private BigDecimal available;
 
     @Column(name ="deleted")
     private Integer deleted;
@@ -43,23 +44,23 @@ public class Source {
         return this.type;
     }
 
-    public String getInternal() {
+    public Integer getInternal() {
         return this.internal;
     }
 
-    public String getMoneyCap() {
+    public BigDecimal getMoneyCap() {
         return this.money_cap;
     }
 
-    public Integer getSpent() {
+    public BigDecimal getSpent() {
         return this.spent;
     }
 
-    public Integer getBudgeted() {
+    public BigDecimal getBudgeted() {
         return this.budgeted;
     }
 
-    public Integer getAvailable() {
+    public BigDecimal getAvailable() {
         return this.available;
     }
 
@@ -77,23 +78,23 @@ public class Source {
         this.type = type;
     }
 
-    public void setInternal(String internal) {
+    public void setInternal(Integer internal) {
         this.internal = internal;
     }
 
-    public void setMoneyCap(String money_cap) {
+    public void setMoneyCap(BigDecimal money_cap) {
         this.money_cap = money_cap;
     }
 
-    public void setSpent(Integer spent) {
+    public void setSpent(BigDecimal spent) {
         this.spent = spent;
     }
 
-    public void setBudgeted(Integer budgeted) {
+    public void setBudgeted(BigDecimal budgeted) {
         this.budgeted = budgeted;
     }
 
-    public void setAvailable(Integer available) {
+    public void setAvailable(BigDecimal available) {
         this.available = available;
     }
 

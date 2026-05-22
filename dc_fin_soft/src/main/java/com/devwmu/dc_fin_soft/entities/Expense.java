@@ -1,6 +1,6 @@
 package com.devwmu.dc_fin_soft.entities;
 import java.time.LocalDateTime;
-
+import java.math.BigDecimal;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,10 +19,10 @@ public class Expense {
     private Integer quantity;
 
     @Column(name ="price_per_unit")
-    private Float price_per_unit;
+    private BigDecimal price_per_unit;
 
     @Column(name ="total_price")
-    private Float total_price;
+    private BigDecimal total_price;
 
     @Column(name ="purpose")
     private String purpose;
@@ -67,10 +67,10 @@ public class Expense {
     private Integer reimbursed_flag;
 
     @Column(name ="money_remaining")
-    private Float money_remaining;
+    private BigDecimal money_remaining;
 
     @Column(name ="total_spent")
-    private Float total_spent;
+    private BigDecimal total_spent;
 
     @Column(name ="pickup_location")
     private String pickup_location;
@@ -103,11 +103,11 @@ public class Expense {
         return this.quantity;
     }
 
-    public Float getPricePerUnit(){
+    public BigDecimal getPricePerUnit(){
         return this.price_per_unit;
     }
 
-    public Float getTotalPrice(){
+    public BigDecimal getTotalPrice(){
         return this.total_price;
     }
 
@@ -163,11 +163,11 @@ public class Expense {
         return this.reimbursed_flag;
     }
 
-    public Float getMoneyRemaining() {
+    public BigDecimal getMoneyRemaining() {
         return this.money_remaining;
     }
 
-    public Float getTotalSpent() {
+    public BigDecimal getTotalSpent() {
         return this.total_spent;
     }
 
@@ -204,11 +204,11 @@ public class Expense {
         this.quantity = quantity;
     }
 
-    public void setPricePerUnit(Float price_per_unit){
+    public void setPricePerUnit(BigDecimal price_per_unit){
         this.price_per_unit = price_per_unit;
     }
 
-    public void setTotalPrice(Float total_price) {
+    public void setTotalPrice(BigDecimal total_price) {
         this.total_price = total_price;
     }
 
@@ -268,11 +268,11 @@ public class Expense {
         this.reimbursed_flag = reimbursed_flag;
     }
 
-    public void setMoneyRemaining(Float money_remaining) {
+    public void setMoneyRemaining(BigDecimal money_remaining) {
         this.money_remaining = money_remaining;
     }
 
-    public void setTotalSpent(Float total_spent) {
+    public void setTotalSpent(BigDecimal total_spent) {
         this.total_spent = total_spent;
     }
 

@@ -1,6 +1,6 @@
 package com.devwmu.dc_fin_soft.entities;
 import java.time.LocalDateTime;
-
+import java.math.BigDecimal;
 import jakarta.persistence.*;
 
 @Entity
@@ -28,7 +28,7 @@ public class Request {
     private Integer quantity;
 
     @Column(name ="price_per_unit")
-    private Float price_per_unit;
+    private BigDecimal price_per_unit;
 
     @Column(name ="deadline")
     private LocalDateTime deadline;
@@ -65,7 +65,7 @@ public class Request {
         return this.quantity;
     }
 
-    public Float getPricePerUnit() {
+    public BigDecimal getPricePerUnit() {
         return this.price_per_unit;
     }
 
@@ -103,7 +103,7 @@ public class Request {
         this.quantity = quantity;
     }
 
-    public void setPricePerUnit(Float price_per_unit) {
+    public void setPricePerUnit(BigDecimal price_per_unit) {
         this.price_per_unit = price_per_unit;
     }
 
