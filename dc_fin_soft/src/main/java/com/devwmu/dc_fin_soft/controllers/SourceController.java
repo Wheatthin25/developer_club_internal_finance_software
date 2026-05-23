@@ -91,6 +91,7 @@ public class SourceController {
         }
         Source source = sourceToDeleteOptional.get();
         source.setDeleted(1);
+
         
         return this.sourceRepository.save(source);
     }
