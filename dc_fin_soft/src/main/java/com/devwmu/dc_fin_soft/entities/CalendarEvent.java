@@ -27,7 +27,7 @@ public class CalendarEvent {
     private String creator;
 
     @Column(name ="group_id")
-    private String group_id;
+    private Integer group_id;
 
     @Column(name ="category")
     private Integer category;
@@ -61,7 +61,7 @@ public class CalendarEvent {
         return this.creator;
     }
 
-    public String getGroupId(){
+    public Integer getGroupId(){
         return this.group_id;
     }
 
@@ -95,7 +95,7 @@ public class CalendarEvent {
         this.creator = creator;
     }
 
-    public void setGroupId(String group_id){
+    public void setGroupId(Integer group_id){
         this.group_id = group_id;
     }
 

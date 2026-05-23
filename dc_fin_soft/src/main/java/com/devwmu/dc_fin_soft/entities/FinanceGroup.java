@@ -6,8 +6,9 @@ import jakarta.persistence.*;
 public class FinanceGroup {
         // initalization
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue()
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name ="title")
     private String title;
@@ -17,7 +18,7 @@ public class FinanceGroup {
 
 
     // getters
-    public String getId(){
+    public Integer getId(){
         return this.id;
     }
 
@@ -30,7 +31,6 @@ public class FinanceGroup {
     }
 
     // setters
-
     public void setTitle(String title){
         this.title = title;
     }
