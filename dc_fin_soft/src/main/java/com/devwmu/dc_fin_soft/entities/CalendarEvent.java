@@ -49,7 +49,7 @@ public class CalendarEvent {
         return this.location;
     }
 
-    public LocalDateTime getStateDateTime(){
+    public LocalDateTime getStartDateTime(){
         return this.start_date_time;
     }
 
@@ -83,7 +83,7 @@ public class CalendarEvent {
         this.location = location;
     }
 
-    public void setStateDateTime(LocalDateTime start_date_time){
+    public void setStartDateTime(LocalDateTime start_date_time){
         this.start_date_time = start_date_time;
     }
 

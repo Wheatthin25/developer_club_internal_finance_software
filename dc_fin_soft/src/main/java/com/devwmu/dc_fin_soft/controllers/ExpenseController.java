@@ -1,5 +1,7 @@
 package com.devwmu.dc_fin_soft.controllers;
+import com.devwmu.dc_fin_soft.repositories.ExpenseRepository;
 import org.springframework.web.bind.annotation.*;
+import java.util.Optional;
 
 import com.devwmu.dc_fin_soft.entities.Expense;
 
@@ -8,6 +10,12 @@ import com.devwmu.dc_fin_soft.entities.Expense;
 @RestController
 @RequestMapping("/expense")
 public class ExpenseController {
+    private final ExpenseRepository expenseRepository;
+
+    ExpenseController(ExpenseRepository expenseRepository) {
+        this.expenseRepository = expenseRepository;
+    }
+
     @GetMapping("/expenses/search")
     public Expense filterExpenses(@RequestParam String[] filterArray){
         // filterExpenses(filterArray[]) ?
@@ -18,30 +26,119 @@ public class ExpenseController {
     }
 
     @PostMapping("/item")
-    public Expense budgetItem(){
+    public Expense budgetItem(@RequestBody Expense expense){
         // budgetItem(name, qty, pricePerUnit, totalPrice, purpose, vendor, foodFlag, eventID, source, link, deadline, community, payment_type, pickup_location) bool
         //     Takes in info to create an entry in the Expenses table and outputs if successful
         //     OUTPUT: success or not
 
-        return new Expense();
+        return this.expenseRepository.save(expense);
     }
 
     @PutMapping("/item/edit_{id}")
-    public Expense editItem(){
+    public Expense editItem(@PathVariable("id") Integer id, @RequestBody Expense expense){
         // editItem(id, editArray[]): bool
         //     The ID of the item and the array of columns to be changed
         //     OUTPUT: success or not
 
-        return new Expense();
+        Optional<Expense> expenseToUpdateOptional = this.expenseRepository.findById(id);
+        if (!expenseToUpdateOptional.isPresent()){
+            return null;
+        }
+
+        Expense expenseToUpdate = expenseToUpdateOptional.get();
+        if (expense.getName() != null){
+            expenseToUpdate.setName(expense.getName());
+        }
+        if (expense.getQuantity() != null){
+            expenseToUpdate.setQuantity(expense.getQuantity());
+        }
+        if (expense.getPricePerUnit() != null){
+            expenseToUpdate.setPricePerUnit(expense.getPricePerUnit());
+        }
+        if (expense.getTotalPrice() != null){
+            expenseToUpdate.setTotalPrice(expense.getTotalPrice());
+        }
+        if (expense.getPurpose() != null){
+            expenseToUpdate.setPurpose(expense.getPurpose());
+        }
+        if (expense.getVendor() != null){
+            expenseToUpdate.setVendor(expense.getVendor());
+        }
+        if (expense.getSourceId() != null){
+            expenseToUpdate.setSourceId(expense.getSourceId());
+        }
+        if (expense.getLink() != null){
+            expenseToUpdate.setLink(expense.getLink());
+        }
+        if (expense.getItemDeadline() != null){
+            expenseToUpdate.setItemDeadline(expense.getItemDeadline());
+        }
+        if (expense.getCommunity() != null){
+            expenseToUpdate.setCommunity(expense.getCommunity());
+        }
+        if (expense.getFoodFlag() != null){
+            expenseToUpdate.setFoodFlag(expense.getFoodFlag());
+        }
+        if (expense.getRequestedFlag() != null){
+            expenseToUpdate.setRequestedFlag(expense.getRequestedFlag());
+        }
+        if (expense.getApprovedFlag() != null){
+            expenseToUpdate.setApprovedFlag(expense.getApprovedFlag());
+        }
+        if (expense.getStartedBuyingFlag() != null){
+            expenseToUpdate.setStartedBuyingFlag(expense.getStartedBuyingFlag());
+        }
+        if (expense.getFinishedBuyingFlag() != null){
+            expenseToUpdate.setFinishedBuyingFlag(expense.getFinishedBuyingFlag());
+        }
+        if (expense.getPickedUpFlag() != null){
+            expenseToUpdate.setPickedUpFlag(expense.getPickedUpFlag());
+        }
+        if (expense.getReimbursedFlag() != null){
+            expenseToUpdate.setReimbursedFlag(expense.getReimbursedFlag());
+        }
+        if (expense.getMoneyRemaining() != null){
+            expenseToUpdate.setMoneyRemaining(expense.getMoneyRemaining());
+        }
+        if (expense.getTotalSpent() != null){
+            expenseToUpdate.setTotalSpent(expense.getTotalSpent());
+        }
+        if (expense.getPickupLocation() != null){
+            expenseToUpdate.setPickupLocation(expense.getPickupLocation());
+        }
+        if (expense.getAllocationDeadline() != null){
+            expenseToUpdate.setAllocationDeadline(expense.getAllocationDeadline());
+        }
+        if (expense.getDeliberationDeadline() != null){
+            expenseToUpdate.setDeliberationDeadline(expense.getDeliberationDeadline());
+        }
+        if (expense.getReimbursementDeadline() != null){
+            expenseToUpdate.setReimbursementDeadline(expense.getReimbursementDeadline());
+        }
+        if (expense.getPaymentType() != null){
+            expenseToUpdate.setPaymentType(expense.getPaymentType());
+        }
+        if (expense.getDeleted() != null){
+            expenseToUpdate.setDeleted(expense.getDeleted());
+        }
+        
+        return this.expenseRepository.save(expenseToUpdate);
     }
 
     @DeleteMapping("/item/delete_{id}")
-    public Expense deleteItem() {
+    public Expense deleteItem(@PathVariable("id") Integer id) {
         // deleteItem(id): bool
         //     The id of the item to be deleted (from display, not database)
         //     OUTPUT: success or not
 
-        return new Expense();
+        Optional<Expense> expenseToDeleteOptional = this.expenseRepository.findById(id);
+        if (!expenseToDeleteOptional.isPresent()){
+            return null;
+        }
+        Expense expense = expenseToDeleteOptional.get();
+        expense.setDeleted(1);
+        
+        return this.expenseRepository.save(expense);    
     }
 
     @PostMapping("/operational_allocation_form")
@@ -53,7 +150,7 @@ public class ExpenseController {
         return new Expense();
     }
 
-        @PutMapping("/started_buying_expense/{id}")
+    @PutMapping("/started_buying_expense/{id}")
     public Expense startedBuyingExpense(){
         // startedBuyingExpense(ExpenseID, decision) bool
         //     Toggling started buying in the expense table
