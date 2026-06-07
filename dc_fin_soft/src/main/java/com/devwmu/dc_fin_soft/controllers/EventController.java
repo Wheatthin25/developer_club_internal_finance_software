@@ -78,6 +78,63 @@ public class EventController {
         return this.eventRepository.save(newEvent);
     }
 
+    @PutMapping("/event/fee_flag_{id}_{num}")
+    public Event feeFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
+        // feeFlagEvent(id, num): bool
+        //     The id of the item to change the fee flag (from database), and what to set it to
+        //     OUTPUT: updated event
+        Optional<Event> eventToUpdateOptional = this.eventRepository.findById(id);
+        if (!eventToUpdateOptional.isPresent()){
+            return null;
+        }
+        Event updateEvent = eventToUpdateOptional.get();
+        if (num == 0){
+            updateEvent.setFeeFlag(0);
+        }
+        else{
+            updateEvent.setFeeFlag(1);
+        }
+        return this.eventRepository.save(updateEvent);
+    }
+
+    @PutMapping("/event/phil_flag_{id}_{num}")
+    public Event philFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
+        // feeFlagEvent(id, num): bool
+        //     The id of the item to change the fee flag (from database), and what to set it to
+        //     OUTPUT: updated event
+        Optional<Event> eventToUpdateOptional = this.eventRepository.findById(id);
+        if (!eventToUpdateOptional.isPresent()){
+            return null;
+        }
+        Event updateEvent = eventToUpdateOptional.get();
+        if (num == 0){
+            updateEvent.setPhilanthropyFlag(0);
+        }
+        else{
+            updateEvent.setPhilanthropyFlag(1);
+        }
+        return this.eventRepository.save(updateEvent);
+    }
+
+    @PutMapping("/event/conf_flag_{id}_{num}")
+    public Event confFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
+        // feeFlagEvent(id, num): bool
+        //     The id of the item to change the fee flag (from database), and what to set it to
+        //     OUTPUT: updated event
+        Optional<Event> eventToUpdateOptional = this.eventRepository.findById(id);
+        if (!eventToUpdateOptional.isPresent()){
+            return null;
+        }
+        Event updateEvent = eventToUpdateOptional.get();
+        if (num == 0){
+            updateEvent.setConferenceFlag(0);
+        }
+        else{
+            updateEvent.setConferenceFlag(1);
+        }
+        return this.eventRepository.save(updateEvent);
+    }
+
     @PutMapping("/event/delete_{id}")
     public Event deleteEvent(@PathVariable("id") Integer id){
         // deleteEvent(id): bool

@@ -1,10 +1,10 @@
 package com.devwmu.dc_fin_soft.controllers;
 import org.springframework.web.bind.annotation.*;
 
+import com.devwmu.dc_fin_soft.entities.Expense;
 import com.devwmu.dc_fin_soft.entities.FinanceGroup;
 import com.devwmu.dc_fin_soft.repositories.FinanceGroupRepository;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 // Fix outputs and inputs
