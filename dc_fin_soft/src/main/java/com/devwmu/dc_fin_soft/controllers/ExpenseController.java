@@ -125,7 +125,133 @@ public class ExpenseController {
         return this.expenseRepository.save(expenseToUpdate);
     }
 
-    @DeleteMapping("/item/delete_{id}")
+    @PutMapping("/item/food_flag_{id}_{num}")
+    public Expense FoodFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
+        // deleteItem(id): bool
+        //     The id of the item to be updates (from display, not database)
+        //     OUTPUT: updated expense
+
+        Optional<Expense> expenseToUpdateOptional = this.expenseRepository.findById(id);
+        if (!expenseToUpdateOptional.isPresent()){
+            return null;
+        }
+        Expense expense = expenseToUpdateOptional.get();
+        if (num == 0){
+            expense.setFoodFlag(0);
+        }
+        else{
+            expense.setFoodFlag(1);
+        }
+        
+        return this.expenseRepository.save(expense);    
+    }
+
+    @PutMapping("/item/requested_flag_{id}_{num}")
+    public Expense requestedFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
+        // deleteItem(id): bool
+        //     The id of the item to be updates (from display, not database)
+        //     OUTPUT: updated expense
+
+        Optional<Expense> expenseToUpdateOptional = this.expenseRepository.findById(id);
+        if (!expenseToUpdateOptional.isPresent()){
+            return null;
+        }
+        Expense expense = expenseToUpdateOptional.get();
+        if (num == 0){
+            expense.setRequestedFlag(0);
+        }
+        else{
+            expense.setRequestedFlag(1);
+        }
+        
+        return this.expenseRepository.save(expense);    
+    }
+
+    @PutMapping("/item/s_buying_flag_{id}_{num}")
+    public Expense SBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
+        // deleteItem(id): bool
+        //     The id of the item to be updates (from display, not database)
+        //     OUTPUT: updated expense
+
+        Optional<Expense> expenseToUpdateOptional = this.expenseRepository.findById(id);
+        if (!expenseToUpdateOptional.isPresent()){
+            return null;
+        }
+        Expense expense = expenseToUpdateOptional.get();
+        if (num == 0){
+            expense.setStartedBuyingFlag(0);
+        }
+        else{
+            expense.setStartedBuyingFlag(1);
+        }
+        
+        return this.expenseRepository.save(expense);    
+    }
+
+    @PutMapping("/item/f_buying_flag_{id}_{num}")
+    public Expense fBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
+        // deleteItem(id): bool
+        //     The id of the item to be updates (from display, not database)
+        //     OUTPUT: updated expense
+
+        Optional<Expense> expenseToUpdateOptional = this.expenseRepository.findById(id);
+        if (!expenseToUpdateOptional.isPresent()){
+            return null;
+        }
+        Expense expense = expenseToUpdateOptional.get();
+        if (num == 0){
+            expense.setFinishedBuyingFlag(0);
+        }
+        else{
+            expense.setFinishedBuyingFlag(1);
+        }
+        
+        return this.expenseRepository.save(expense);    
+    }
+
+    @PutMapping("/item/picked_up_flag_{id}_{num}")
+    public Expense pickedUpFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
+        // deleteItem(id): bool
+        //     The id of the item to be updates (from display, not database)
+        //     OUTPUT: updated expense
+
+        Optional<Expense> expenseToUpdateOptional = this.expenseRepository.findById(id);
+        if (!expenseToUpdateOptional.isPresent()){
+            return null;
+        }
+        Expense expense = expenseToUpdateOptional.get();
+        if (num == 0){
+            expense.setPickedUpFlag(0);
+        }
+        else{
+            expense.setPickedUpFlag(1);
+        }
+        
+        return this.expenseRepository.save(expense);    
+    }
+
+    @PutMapping("/item/reimbursed_flag_{id}_{num}")
+    public Expense reimbursedFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
+        // deleteItem(id): bool
+        //     The id of the item to be updates (from display, not database)
+        //     OUTPUT: updated expense
+
+        Optional<Expense> expenseToUpdateOptional = this.expenseRepository.findById(id);
+        if (!expenseToUpdateOptional.isPresent()){
+            return null;
+        }
+        Expense expense = expenseToUpdateOptional.get();
+        if (num == 0){
+            expense.setReimbursedFlag(0);
+        }
+        else{
+            expense.setReimbursedFlag(1);
+        }
+        
+        return this.expenseRepository.save(expense);    
+    }
+
+    @PutMapping("/item/delete_{id}")
     public Expense deleteItem(@PathVariable("id") Integer id) {
         // deleteItem(id): bool
         //     The id of the item to be deleted (from display, not database)
