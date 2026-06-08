@@ -1,7 +1,6 @@
 package com.devwmu.dc_fin_soft.controllers;
 import org.springframework.web.bind.annotation.*;
 
-import com.devwmu.dc_fin_soft.entities.Expense;
 import com.devwmu.dc_fin_soft.entities.FinanceGroup;
 import com.devwmu.dc_fin_soft.repositories.FinanceGroupRepository;
 import java.util.Optional;
@@ -59,7 +58,7 @@ public class FinanceGroupController {
         return this.financeGroupRepository.save(financeGroup);
     }
 
-    @PutMapping("/finance_group/{id}")
+    @PutMapping("/finance_group_{id}")
     public FinanceGroup removeGroup(@PathVariable("id") Integer id){
         // removeGroup(name): bool
         //     removes a group by its name

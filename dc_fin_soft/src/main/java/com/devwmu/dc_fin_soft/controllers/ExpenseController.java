@@ -125,7 +125,7 @@ public class ExpenseController {
         return this.expenseRepository.save(expenseToUpdate);
     }
 
-    @PutMapping("/item/food_flag_{id}_{num}")
+    @PutMapping("/item/food_flag_id={id}_num={num}")
     public Expense FoodFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -146,7 +146,7 @@ public class ExpenseController {
         return this.expenseRepository.save(expense);    
     }
 
-    @PutMapping("/item/requested_flag_{id}_{num}")
+    @PutMapping("/item/requested_flag_id={id}_num={num}")
     public Expense requestedFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -167,7 +167,7 @@ public class ExpenseController {
         return this.expenseRepository.save(expense);    
     }
 
-    @PutMapping("/item/s_buying_flag_{id}_{num}")
+    @PutMapping("/item/s_buying_flag_id={id}_num={num}")
     public Expense SBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -188,7 +188,7 @@ public class ExpenseController {
         return this.expenseRepository.save(expense);    
     }
 
-    @PutMapping("/item/f_buying_flag_{id}_{num}")
+    @PutMapping("/item/f_buying_flag_id={id}_num={num}")
     public Expense fBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -209,7 +209,7 @@ public class ExpenseController {
         return this.expenseRepository.save(expense);    
     }
 
-    @PutMapping("/item/picked_up_flag_{id}_{num}")
+    @PutMapping("/item/picked_up_flag_id={id}_num={num}")
     public Expense pickedUpFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -230,7 +230,7 @@ public class ExpenseController {
         return this.expenseRepository.save(expense);    
     }
 
-    @PutMapping("/item/reimbursed_flag_{id}_{num}")
+    @PutMapping("/item/reimbursed_flag_id={id}_num={num}")
     public Expense reimbursedFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)

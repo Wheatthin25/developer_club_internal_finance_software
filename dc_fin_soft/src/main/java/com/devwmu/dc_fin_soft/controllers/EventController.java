@@ -78,7 +78,7 @@ public class EventController {
         return this.eventRepository.save(newEvent);
     }
 
-    @PutMapping("/event/fee_flag_{id}_{num}")
+    @PutMapping("/event/fee_flag_id={id}_num={num}")
     public Event feeFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
         // feeFlagEvent(id, num): bool
         //     The id of the item to change the fee flag (from database), and what to set it to
@@ -97,7 +97,7 @@ public class EventController {
         return this.eventRepository.save(updateEvent);
     }
 
-    @PutMapping("/event/phil_flag_{id}_{num}")
+    @PutMapping("/event/phil_flag_id={id}_num=_{num}")
     public Event philFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
         // feeFlagEvent(id, num): bool
         //     The id of the item to change the fee flag (from database), and what to set it to
@@ -116,7 +116,7 @@ public class EventController {
         return this.eventRepository.save(updateEvent);
     }
 
-    @PutMapping("/event/conf_flag_{id}_{num}")
+    @PutMapping("/event/conf_flag_id={id}_num={num}")
     public Event confFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
         // feeFlagEvent(id, num): bool
         //     The id of the item to change the fee flag (from database), and what to set it to
