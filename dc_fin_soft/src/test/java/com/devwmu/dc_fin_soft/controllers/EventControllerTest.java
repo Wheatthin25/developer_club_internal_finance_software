@@ -6,6 +6,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.devwmu.dc_fin_soft.controllers.*;
 import com.devwmu.dc_fin_soft.entities.*;
+
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -24,11 +26,115 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(value = Event.class)
+@WebMvcTest(Event.class)
 public class EventControllerTest {
-    // standard testing
+    // web level testing - tests that path goes to correct function
+    @Nested
+    class filterEventsTest{
+        // invididual tests
+    }
+
+    @Nested
+    class getAllEventsTest{
+        // invididual tests
+    }
+
+    @Nested
+    class createEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class editEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class feeFlagEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class philFlagEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class confFlagEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class deleteEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class createEventAllocationFormTest{
+        // individual tests
+    }
+
+    @Nested
+    class createConferenceAllocationFormTest{
+        // individual tests
+    }
 
 }
 
 
 // Needs integrated testing and standard testing (add integration testing later)
+
+@SpringBootTest
+class EventControllerTestInt {
+    // standard testing
+    @Nested
+    class filterEventsTest{
+        // invididual tests
+    }
+
+    @Nested
+    class getAllEventsTest{
+        // invididual tests
+    }
+
+    @Nested
+    class createEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class editEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class feeFlagEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class philFlagEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class confFlagEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class deleteEventTest{
+        // invididual tests
+    }
+
+    @Nested
+    class createEventAllocationFormTest{
+        // individual tests
+    }
+
+    @Nested
+    class createConferenceAllocationFormTest{
+        // individual tests
+    }
+
+}

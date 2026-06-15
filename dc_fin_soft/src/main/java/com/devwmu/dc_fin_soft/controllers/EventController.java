@@ -18,10 +18,14 @@ public class EventController {
     }
     @GetMapping("/events/search")
     public Event filterEvents(){
-        // custom
+        // CUSTOM
         // filterEvents(filterArray[]) ? 
         //     Take an array of column names and desired values, and output the selected SQL rows
         //     OUTPUT: events
+
+        // have to ask further q's
+    
+        // returns the events that match
 
         return new Event();
     }
@@ -151,11 +155,14 @@ public class EventController {
 
     @PostMapping("/event_allocation_form")
     public Event createEventAllocationForm(){
-        // custom
+        // CUSTOM
         // createEventAllocationForm(ExpenseID): bool
         //     Generates an Event request form
-        //     OUTPUT: success or not
+        //     OUTPUT: form
 
+        // takes in the event id, extracts info for form, 
+        // make calls to excel api to edit the excel file, 
+        // then output the form
         return new Event();
     }
 
@@ -166,6 +173,9 @@ public class EventController {
         //     Generate a conference request form
         //     OUTPUT: success or not
 
+        // takes in the event id, extracts info for form, 
+        // make calls to excel api to edit the excel file, 
+        // then output the form
         return new Event();
     }
 }

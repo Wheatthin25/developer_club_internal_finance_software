@@ -168,7 +168,7 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/s_buying_flag_id={id}_num={num}")
-    public Expense SBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
+    public Expense sBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
         //     OUTPUT: updated expense
@@ -276,51 +276,6 @@ public class ExpenseController {
         return new Expense();
     }
 
-    @PutMapping("/started_buying_expense/{id}")
-    public Expense startedBuyingExpense(){
-        // startedBuyingExpense(ExpenseID, decision) bool
-        //     Toggling started buying in the expense table
-        //     OUTPUT: success or not
-
-        return new Expense();
-    }
-
-    @PutMapping("/requested_expense/{id}")
-    public Expense requestedExpense(){
-        // requestedExpense(ExpenseID, decision) bool
-        //     Toggling started buying in the expense table
-        //     OUTPUT: success or not
-
-        return new Expense();
-    }
-
-    @PutMapping("/finished_buying_expense/{id}")
-    public Expense finishedBuyingExpense(){
-        // finishedBuyingExpense(ExpenseID, decision) bool
-        //     Toggling finishedBuying in the expense table
-        //     OUTPUT: success or not
-
-        return new Expense();
-    }
-
-    @PutMapping("/picked_up/{id}")
-    public Expense pickedUp(){
-        // pickedUp(ExpenseID, decision): bool
-        //     Toggling picked up in the expense table
-        //     OUTPUT: success or not
-
-        return new Expense();
-    }
-
-    @PutMapping("/expense/{id}")
-    public Expense approveExpense(){
-        // approveExpense(ExpenseID, decision) bool
-        //     Toggling approve in the expense table
-        //     OUTPUT: success or not
-
-        return new Expense();
-    }
-
     @PostMapping("/allocation_not_spent")
     public Expense allocationNotSpentAlert(){
         // allocationNotSpentAlert(expenseID) success
@@ -380,14 +335,4 @@ public class ExpenseController {
 
         return new Expense();
     }
-
-    @PutMapping("/reimbursed/{id}")
-    public Expense reimbursed(){
-        // reimbursed(ExpenseID, decision) bool
-        //     Toggling reimbursed in the expense table
-        //     OUTPUT: success or not
-
-        return new Expense();
-    }
-
 }

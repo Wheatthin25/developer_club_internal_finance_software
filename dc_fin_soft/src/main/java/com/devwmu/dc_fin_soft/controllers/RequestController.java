@@ -29,6 +29,9 @@ public class RequestController {
         //     Take an array of column names and desired values, and output the selected SQL rows
         //     OUTPUT: requests
 
+        // have to ask further q's
+    
+        // returns the events that match
         return new Request();
     }
 
@@ -119,6 +122,7 @@ public class RequestController {
         //     Sends a notification to the admin of the dev club about a new request
         //     OUTPUT: success or not
 
+        // do a search of the admins of the database, and email them that a new request has been made
         return new Request();
     }
 
@@ -129,7 +133,8 @@ public class RequestController {
         //     Updates the requestee on the request that there has been a change to their request (and what the change is)
         //     OUTPUT: success or not
 
-        
+        // when admin changes approves/disapproves of a request, it will call this funcion
+        // take in the id of the request, extract who made the request, and send them an email
         return new Request();
     }
 }

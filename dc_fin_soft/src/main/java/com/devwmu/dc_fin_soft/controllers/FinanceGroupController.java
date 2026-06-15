@@ -28,25 +28,33 @@ public class FinanceGroupController {
         //     Filters through the finance groups based on array specs
         //     OUTPUT: success or not
 
+    // have to ask further q's
+    
+        // returns the events that match
         return new FinanceGroup();
     }
 
-    @PostMapping("/finance_group_users/{user}")
+    @PutMapping("/finance_group_users/{user}")
     public FinanceGroup addUserToGroup(){
         // custom
         // addUserToGroup(user, group): bool
         //     Adds a specific user to a group
         //     OUTPUT: 
+
+        // modify finGroup column of users table - will have to add finGroup col to do this
+        // return updated user
         return new FinanceGroup();
     }
 
-    @DeleteMapping("/finance_group_users/{user}")
+    @PutMapping("/finance_group_users/{user}")
     public FinanceGroup removeUserFromGroup(){
         // custom
         // removeUserFromGroup(user, group): bool
         //     Removes a specific user from a group
         //     OUTPUT: success or not
 
+        // modify finGroup column of users table - will have to add finGroup col to do this
+        // return updated user
         return new FinanceGroup();
     }
 
