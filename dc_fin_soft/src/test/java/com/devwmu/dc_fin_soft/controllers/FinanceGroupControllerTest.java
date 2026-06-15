@@ -6,6 +6,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.devwmu.dc_fin_soft.controllers.*;
 import com.devwmu.dc_fin_soft.entities.*;
+
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -24,11 +26,72 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(value = FinanceGroup.class)
+@WebMvcTest(FinanceGroup.class)
 public class FinanceGroupControllerTest {
-    // standard testing
+    // web level testing - tests that path goes to correct function
+    @Nested
+    class getAllFinanceGroupsTest{
+        // individual tests
+    }
 
+    @Nested
+    class filterFinanceGroupsTest{
+        // individual tests
+    }
+
+    @Nested
+    class addUserToGroupTest{
+        // individual tests
+    }
+
+    @Nested
+    class removeUserFromGroupTest{
+        // individual tests
+    }
+
+    @Nested
+    class CreateGroupTest{
+        // individual tests
+    }
+
+    @Nested
+    class removeGroupTest{
+        // individual tests
+    }
 }
 
 
 // Needs integrated testing and standard testing (add integration testing later)
+@SpringBootTest
+class FinanceGroupControllerTestInt {
+    // web level testing - tests that path goes to correct function
+    @Nested
+    class getAllFinanceGroupsTest{
+        // individual tests
+    }
+
+    @Nested
+    class filterFinanceGroupsTest{
+        // individual tests
+    }
+
+    @Nested
+    class addUserToGroupTest{
+        // individual tests
+    }
+
+    @Nested
+    class removeUserFromGroupTest{
+        // individual tests
+    }
+
+    @Nested
+    class CreateGroupTest{
+        // individual tests
+    }
+
+    @Nested
+    class removeGroupTest{
+        // individual tests
+    }
+}

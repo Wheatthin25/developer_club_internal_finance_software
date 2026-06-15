@@ -6,6 +6,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.devwmu.dc_fin_soft.controllers.*;
 import com.devwmu.dc_fin_soft.entities.*;
+
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -24,11 +26,96 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(value = Request.class)
+@WebMvcTest(Request.class)
 public class RequestControllerTest {
-    // standard testing
+    // web level testing - tests that path goes to correct function
+    
+    @Nested
+    class getAllRequestsTest{
+        // individual tests
+    }
+
+    @Nested
+    class filterRequestsTest{
+        // individual tests
+    }
+
+    @Nested
+    class createRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class editRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class deleteRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class approveRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class newRequestNotifyTest{
+        // individual tests
+    }
+
+    @Nested
+    class requestStatusUpdatedNotifyTest{
+        // individual tests
+    }
 
 }
 
 
 // Needs integrated testing and standard testing (add integration testing later)
+@SpringBootTest
+class RequestControllerTestInt {
+    // web level testing - tests that path goes to correct function
+    
+    @Nested
+    class getAllRequestsTest{
+        // individual tests
+    }
+
+    @Nested
+    class filterRequestsTest{
+        // individual tests
+    }
+
+    @Nested
+    class createRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class editRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class deleteRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class approveRequestTest{
+        // individual tests
+    }
+
+    @Nested
+    class newRequestNotifyTest{
+        // individual tests
+    }
+
+    @Nested
+    class requestStatusUpdatedNotifyTest{
+        // individual tests
+    }
+
+}
