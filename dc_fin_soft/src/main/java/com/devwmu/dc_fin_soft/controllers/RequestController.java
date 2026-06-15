@@ -29,7 +29,16 @@ public class RequestController {
         //     Take an array of column names and desired values, and output the selected SQL rows
         //     OUTPUT: requests
 
-        // have to ask further q's
+        // id: equality
+        // community_name: equality/ maybe LIKE
+        // requestee_user: equality/ maybe LIKE
+        // item_name: equality/ maybe LIKE
+        // approval: equality
+        // quantity: less than, greater than, equality
+        // price_per: less than, greater than, equality
+        // deadline: less than, equality
+        // purpose: equality/ maybe LIKE
+        // deleted: equality
     
         // returns the events that match
         return new Request();

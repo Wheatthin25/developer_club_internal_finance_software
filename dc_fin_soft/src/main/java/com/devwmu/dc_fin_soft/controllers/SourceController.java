@@ -28,7 +28,15 @@ public class SourceController {
         //      Take an array of column names and desired values, and output the selected SQL rows
         //      OUTPUT: sources
 
-        // have to ask further q's
+        // id: equality
+        // name: equality/ maybe LIKE
+        // type: equality/ maybe LIKE
+        // internal: equality
+        // money_cap: less than, greater than, equality
+        // spent: less than, greater than, equality
+        // budgeted: equality
+        // available: equality
+        // deleted: equality
 
         // returns the events that match
         return new Source();

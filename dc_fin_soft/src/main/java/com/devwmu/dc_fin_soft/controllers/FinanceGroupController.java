@@ -28,7 +28,9 @@ public class FinanceGroupController {
         //     Filters through the finance groups based on array specs
         //     OUTPUT: success or not
 
-    // have to ask further q's
+        // id: equality
+        // title: equality/ maybe LIKE
+        // deleted: equality
     
         // returns the events that match
         return new FinanceGroup();

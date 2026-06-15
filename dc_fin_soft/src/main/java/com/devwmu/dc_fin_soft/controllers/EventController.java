@@ -23,7 +23,15 @@ public class EventController {
         //     Take an array of column names and desired values, and output the selected SQL rows
         //     OUTPUT: events
 
-        // have to ask further q's
+        // id: just equality
+        // name: equality/ maybe LIKE
+        // date: less than, equality
+        // location: equality/ maybe LIKE
+        // est_attendance: less than, greater, equality
+        // fee_flag: equality
+        // phil flagg: equality
+        // conference flag: equality
+        // deleted: equality
     
         // returns the events that match
 
