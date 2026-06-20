@@ -15,6 +15,6 @@ public interface RequestRepository extends CrudRepository<Request, Integer> {
     List<Request> findByQuantityGreaterThanEqual(Integer quantity);
     List<Request> findByPricePerUnitLessThanEqual(BigDecimal pricePerUnit);
     List<Request> findByPricePerUnitGreaterThanEqual(BigDecimal pricePerUnit);
-    List<Request> findByDeadlineBetween(LocalDateTime deadline);
+    List<Request> findByDeadlineBetween(LocalDateTime date1, LocalDateTime date2);
     List<Request> findByPurposeContainingIgnoreCase(String purpose);
 } 

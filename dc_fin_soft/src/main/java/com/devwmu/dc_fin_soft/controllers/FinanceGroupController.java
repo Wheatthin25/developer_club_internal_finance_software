@@ -1,10 +1,14 @@
 package com.devwmu.dc_fin_soft.controllers;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
-
+import com.devwmu.dc_fin_soft.controllers.Filter;
+import com.devwmu.dc_fin_soft.controllers.specifications.FinanceGroupSpecification;
 import com.devwmu.dc_fin_soft.entities.FinanceGroup;
 import com.devwmu.dc_fin_soft.repositories.FinanceGroupRepository;
-import java.util.Optional;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 // Fix outputs and inputs
 
@@ -21,22 +25,53 @@ public class FinanceGroupController {
         return this.financeGroupRepository.findAll();
     }
     
-    @GetMapping("/finance_groups/search")
-    public FinanceGroup filterFinanceGroups(){
+    @PutMapping("/finance_groups/search")
+    public Iterable<FinanceGroup> filterFinanceGroups(@RequestBody Filter[] filters){
     // custom
     // filterFinanceGroups(filterArray[]): Group (?? data type)	
         //     Filters through the finance groups based on array specs
         //     OUTPUT: success or not
 
         // id: equality
-        // title: equality/ maybe LIKE
+        // title: contains
         // deleted: equality
     
         // returns the events that match
-        return new FinanceGroup();
+        Specification<FinanceGroup> spec = Specification.unrestricted();
+        System.out.println("hi?\n\n\n\n");
+        for (Filter filter: filters){
+            String col = filter.getCol();
+            String op = filter.getOp().toLowerCase();
+            Object value = filter.getVal();
+
+            if (value == null){
+                continue;
+            }
+
+            Specification<FinanceGroup> condition = null;
+            System.out.println("op: " + op + "\n\n\n\n");
+            switch (op) {
+                case "like":
+                    condition = FinanceGroupSpecification.likeTitle(value.toString());
+                    break;
+                case "eq":
+                    System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee2!\n\n\n\n");
+                    condition = (root, query, criteriaBuilder) -> 
+                        criteriaBuilder.equal(root.get(col), value);
+                    break;
+            }
+            
+            if (condition != null){
+                spec = spec.and(condition);
+                System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!\n\n\n\n");
+            }
+
+        }
+        System.out.println("different hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!\n\n\n\n");
+        return this.financeGroupRepository.findAll(spec);
     }
 
-    @PutMapping("/finance_group_users/{user}")
+    @PutMapping("/finance_group_users/add_{user}")
     public FinanceGroup addUserToGroup(){
         // custom
         // addUserToGroup(user, group): bool
@@ -48,7 +83,7 @@ public class FinanceGroupController {
         return new FinanceGroup();
     }
 
-    @PutMapping("/finance_group_users/{user}")
+    @PutMapping("/finance_group_users/remove_{user}")
     public FinanceGroup removeUserFromGroup(){
         // custom
         // removeUserFromGroup(user, group): bool
