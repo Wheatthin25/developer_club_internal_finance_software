@@ -51,6 +51,7 @@ public class FinanceGroupController {
                             criteraBuilder.like(criteraBuilder.lower(root.get(col)), lower);
                         break;
                     } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
                         break;
                     }
                 case "eq":

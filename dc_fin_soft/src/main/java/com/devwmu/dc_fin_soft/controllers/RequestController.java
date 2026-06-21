@@ -1,8 +1,13 @@
 package com.devwmu.dc_fin_soft.controllers;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import com.devwmu.dc_fin_soft.entities.Request;
 import com.devwmu.dc_fin_soft.repositories.RequestRepository;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 // Fix outputs and inputs
@@ -22,8 +27,8 @@ public class RequestController {
 
         return this.requestRepository.findAll();
     }
-    @GetMapping("/requests/search")
-    public Request filterRequests(){
+    @PutMapping("/requests/search")
+    public Iterable<Request> filterRequests(@RequestBody Filter[] filters){
         // custom
         // filterRequests(filterArray[]) ? 
         //     Take an array of column names and desired values, and output the selected SQL rows
@@ -41,7 +46,75 @@ public class RequestController {
         // deleted: equality
     
         // returns the events that match
-        return new Request();
+
+        Specification<Request> spec = Specification.unrestricted();
+        for (Filter filter: filters){
+            String col = filter.getCol();
+            String op = filter.getOp().toLowerCase();
+            Object value = filter.getVal();
+
+            if (value == null){
+                continue;
+            }
+
+            Specification<Request> condition = null;
+            switch (op) {
+                case "like":
+                    try{
+                        String lower = "%" + value.toString().toLowerCase() + "%";
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.like(criteraBuilder.lower(root.get(col)), lower);
+                        break;
+                    }
+                    catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "bw":
+                    try {
+                        ArrayList<String> value2 = (ArrayList<String>) value;
+                        LocalDateTime date1 = LocalDateTime.parse(value2.get(0));
+                        LocalDateTime date2 = LocalDateTime.parse(value2.get(1));
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.between(root.get(col), date1, date2);
+
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "leq": 
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.lessThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "geq":
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.greaterThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "eq":
+                    condition = (root, query, criteriaBuilder) -> 
+                        criteriaBuilder.equal(root.get(col), value);
+                    break;
+            }
+            
+            if (condition != null){
+                spec = spec.and(condition);
+            }
+
+        }
+        return this.requestRepository.findAll(spec);
     }
 
     @PostMapping("/request")

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import com.devwmu.dc_fin_soft.entities.Event;
 import com.devwmu.dc_fin_soft.repositories.EventRepository;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 
@@ -47,7 +48,6 @@ public class EventController {
             }
 
             Specification<Event> condition = null;
-            System.out.println("op: " + op + "\n\n\n");
             switch (op) {
                 case "like":
                     try{
@@ -57,18 +57,20 @@ public class EventController {
                         break;
                     }
                     catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
                         break;
                     }
                 case "bw":
                     try {
-                        LocalDateTime[] value2 = (LocalDateTime[]) value;
-                        LocalDateTime date1 = value2[0];
-                        LocalDateTime date2 = value2[1];
+                        ArrayList<String> value2 = (ArrayList<String>) value;
+                        LocalDateTime date1 = LocalDateTime.parse(value2.get(0));
+                        LocalDateTime date2 = LocalDateTime.parse(value2.get(1));
                         condition =  (root, query, criteraBuilder) ->
                             criteraBuilder.between(root.get(col), date1, date2);
 
                         break;
                     } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
                         break;
                     }
                 case "leq": 
@@ -78,6 +80,7 @@ public class EventController {
                             criteraBuilder.lessThanOrEqualTo(root.get(col), val);
                         break;
                     } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
                         break;
                     }
                 case "geq":
@@ -87,6 +90,7 @@ public class EventController {
                             criteraBuilder.greaterThanOrEqualTo(root.get(col), val);
                         break;
                     } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
                         break;
                     }
                 case "eq":
@@ -96,7 +100,6 @@ public class EventController {
             }
             
             if (condition != null){
-                System.out.println("condition: " + condition + "\n\n\n");
                 spec = spec.and(condition);
             }
 
