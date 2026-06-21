@@ -1,8 +1,9 @@
 package com.devwmu.dc_fin_soft.controllers;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
-
 import com.devwmu.dc_fin_soft.entities.Event;
 import com.devwmu.dc_fin_soft.repositories.EventRepository;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 
@@ -16,8 +17,8 @@ public class EventController {
     public EventController(final EventRepository eventRepository) {
     this.eventRepository = eventRepository;
     }
-    @GetMapping("/events/search")
-    public Event filterEvents(){
+    @PutMapping("/events/search")
+    public Iterable<Event> filterEvents(@RequestBody Filter[] filters){
         // CUSTOM
         // filterEvents(filterArray[]) ? 
         //     Take an array of column names and desired values, and output the selected SQL rows
@@ -35,7 +36,72 @@ public class EventController {
     
         // returns the events that match
 
-        return new Event();
+        Specification<Event> spec = Specification.unrestricted();
+        for (Filter filter: filters){
+            String col = filter.getCol();
+            String op = filter.getOp().toLowerCase();
+            Object value = filter.getVal();
+
+            if (value == null){
+                continue;
+            }
+
+            Specification<Event> condition = null;
+            System.out.println("op: " + op + "\n\n\n");
+            switch (op) {
+                case "like":
+                    try{
+                        String lower = "%" + value.toString().toLowerCase() + "%";
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.like(criteraBuilder.lower(root.get(col)), lower);
+                        break;
+                    }
+                    catch (ClassCastException e){
+                        break;
+                    }
+                case "bw":
+                    try {
+                        LocalDateTime[] value2 = (LocalDateTime[]) value;
+                        LocalDateTime date1 = value2[0];
+                        LocalDateTime date2 = value2[1];
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.between(root.get(col), date1, date2);
+
+                        break;
+                    } catch (ClassCastException e){
+                        break;
+                    }
+                case "leq": 
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.lessThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        break;
+                    }
+                case "geq":
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.greaterThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        break;
+                    }
+                case "eq":
+                    condition = (root, query, criteriaBuilder) -> 
+                        criteriaBuilder.equal(root.get(col), value);
+                    break;
+            }
+            
+            if (condition != null){
+                System.out.println("condition: " + condition + "\n\n\n");
+                spec = spec.and(condition);
+            }
+
+        }
+        return this.eventRepository.findAll(spec);
     }
     @GetMapping("/all_events")
     public Iterable<Event> getAllEvents() {

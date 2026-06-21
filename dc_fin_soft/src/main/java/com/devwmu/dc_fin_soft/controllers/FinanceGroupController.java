@@ -1,13 +1,8 @@
 package com.devwmu.dc_fin_soft.controllers;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
-import com.devwmu.dc_fin_soft.controllers.Filter;
-import com.devwmu.dc_fin_soft.controllers.specifications.FinanceGroupSpecification;
 import com.devwmu.dc_fin_soft.entities.FinanceGroup;
 import com.devwmu.dc_fin_soft.repositories.FinanceGroupRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 // Fix outputs and inputs
@@ -38,7 +33,6 @@ public class FinanceGroupController {
     
         // returns the events that match
         Specification<FinanceGroup> spec = Specification.unrestricted();
-        System.out.println("hi?\n\n\n\n");
         for (Filter filter: filters){
             String col = filter.getCol();
             String op = filter.getOp().toLowerCase();
@@ -49,13 +43,17 @@ public class FinanceGroupController {
             }
 
             Specification<FinanceGroup> condition = null;
-            System.out.println("op: " + op + "\n\n\n\n");
             switch (op) {
                 case "like":
-                    condition = FinanceGroupSpecification.likeTitle(value.toString());
-                    break;
+                    try{
+                        String lower = "%" + value.toString().toLowerCase() + "%";
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.like(criteraBuilder.lower(root.get(col)), lower);
+                        break;
+                    } catch (ClassCastException e){
+                        break;
+                    }
                 case "eq":
-                    System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee2!\n\n\n\n");
                     condition = (root, query, criteriaBuilder) -> 
                         criteriaBuilder.equal(root.get(col), value);
                     break;
@@ -63,11 +61,9 @@ public class FinanceGroupController {
             
             if (condition != null){
                 spec = spec.and(condition);
-                System.out.println("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!\n\n\n\n");
             }
 
         }
-        System.out.println("different hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!\n\n\n\n");
         return this.financeGroupRepository.findAll(spec);
     }
 
