@@ -1,7 +1,11 @@
 package com.devwmu.dc_fin_soft.controllers;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import com.devwmu.dc_fin_soft.repositories.SourceRepository;
 import com.devwmu.dc_fin_soft.entities.Source;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 
 // Fix outputs and inputs
@@ -21,8 +25,8 @@ public class SourceController {
         return this.sourceRepository.findAll();
     }
 
-    @GetMapping("/sources/search")
-    public Source filterSources(@RequestParam String[] filterArray) {
+    @PutMapping("/sources/search")
+    public Iterable<Source> filterSources(@RequestBody Filter[] filters) {
         // custom
         // filterSources(filterArray[]) ?
         //      Take an array of column names and desired values, and output the selected SQL rows
@@ -39,7 +43,61 @@ public class SourceController {
         // deleted: equality
 
         // returns the events that match
-        return new Source();
+        Specification<Source> spec = Specification.unrestricted();
+        for (Filter filter: filters){
+            String col = filter.getCol();
+            String op = filter.getOp().toLowerCase();
+            Object value = filter.getVal();
+
+            if (value == null){
+                continue;
+            }
+
+            Specification<Source> condition = null;
+            switch (op) {
+                case "like":
+                    try{
+                        String lower = "%" + value.toString().toLowerCase() + "%";
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.like(criteraBuilder.lower(root.get(col)), lower);
+                        break;
+                    }
+                    catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "leq": 
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.lessThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "geq":
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.greaterThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "eq":
+                    condition = (root, query, criteriaBuilder) -> 
+                        criteriaBuilder.equal(root.get(col), value);
+                    break;
+            }
+            
+            if (condition != null){
+                spec = spec.and(condition);
+            }
+
+        }
+        return this.sourceRepository.findAll(spec);
     }
 
     @PostMapping("/source")
