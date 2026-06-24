@@ -1,5 +1,7 @@
 package com.devwmu.dc_fin_soft.controllers;
 import com.devwmu.dc_fin_soft.repositories.ExpenseRepository;
+
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
@@ -16,13 +18,73 @@ public class ExpenseController {
         this.expenseRepository = expenseRepository;
     }
 
-    @GetMapping("/expenses/search")
-    public Expense filterExpenses(@RequestParam String[] filterArray){
+    @GetMapping("/expenses")
+    public Iterable<Expense> getAllExpenses (){
+        //     OUTPUT: all expenses
+
+        return this.expenseRepository.findAll();
+    }
+
+    @PutMapping("/expenses/search")
+    public Iterable<Expense> filterExpenses(@RequestBody Filter[] filters){
         // filterExpenses(filterArray[]) ?
         //     Take an array of column names and the desired value, and output the selected SQL rows
         //     OUTPUT: expenses
+        Specification<Expense> spec = Specification.unrestricted();
+        for (Filter filter: filters){
+            String col = filter.getCol();
+            String op = filter.getOp().toLowerCase();
+            Object value = filter.getVal();
 
-        return new Expense();
+            if (value == null){
+                continue;
+            }
+
+            Specification<Expense> condition = null;
+            switch (op) {
+                case "like":
+                    try{
+                        String lower = "%" + value.toString().toLowerCase() + "%";
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.like(criteraBuilder.lower(root.get(col)), lower);
+                        break;
+                    }
+                    catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "leq": 
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.lessThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "geq":
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.greaterThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "eq":
+                    condition = (root, query, criteriaBuilder) -> 
+                        criteriaBuilder.equal(root.get(col), value);
+                    break;
+            }
+            
+            if (condition != null){
+                spec = spec.and(condition);
+            }
+
+        }
+        return this.expenseRepository.findAll(spec);
     }
 
     @PostMapping("/item")

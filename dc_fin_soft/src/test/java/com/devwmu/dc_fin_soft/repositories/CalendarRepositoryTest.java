@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.autoconfigure.*;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 
-import com.devwmu.dc_fin_soft.repositories.CalendarRepository;
+import com.devwmu.dc_fin_soft.repositories.CalendarEventRepository;
 
 
 @DataJpaTest
 class CalendarRepositoryTest {
 
     @Autowired
-    private CalendarRepository calendarRepository;
+    private CalendarEventRepository calendarEventRepository;
 
     @Test
     void contextLoads() {
