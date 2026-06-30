@@ -23,9 +23,9 @@ public class FinanceGroupController {
     @PutMapping("/finance_groups/search")
     public Iterable<FinanceGroup> filterFinanceGroups(@RequestBody Filter[] filters){
     // custom
-    // filterFinanceGroups(filterArray[]): Group (?? data type)	
+    // filterFinanceGroups(filterArray[]): Iterable<FinGroup> 	
         //     Filters through the finance groups based on array specs
-        //     OUTPUT: success or not
+        //     OUTPUT: the selected rows
 
         // id: equality
         // title: contains
@@ -73,7 +73,7 @@ public class FinanceGroupController {
         // custom
         // addUserToGroup(user, group): bool
         //     Adds a specific user to a group
-        //     OUTPUT: 
+        //     OUTPUT: The updated User
 
         // modify finGroup column of users table - will have to add finGroup col to do this
         // return updated user
@@ -85,7 +85,7 @@ public class FinanceGroupController {
         // custom
         // removeUserFromGroup(user, group): bool
         //     Removes a specific user from a group
-        //     OUTPUT: success or not
+        //     OUTPUT: The updated User
 
         // modify finGroup column of users table - will have to add finGroup col to do this
         // return updated user

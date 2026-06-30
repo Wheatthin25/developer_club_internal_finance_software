@@ -20,8 +20,7 @@ public class EventController {
     }
     @PutMapping("/events/search")
     public Iterable<Event> filterEvents(@RequestBody Filter[] filters){
-        // CUSTOM
-        // filterEvents(filterArray[]) ? 
+        // filterEvents(filterArray[]) Iterable<Event>
         //     Take an array of column names and desired values, and output the selected SQL rows
         //     OUTPUT: events
 
