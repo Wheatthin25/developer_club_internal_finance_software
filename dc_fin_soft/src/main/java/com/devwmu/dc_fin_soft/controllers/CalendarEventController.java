@@ -17,7 +17,7 @@ import com.devwmu.dc_fin_soft.entities.CalendarEvent;
 
 @RestController
 @RequestMapping("/calendar")
-@Tag(name = "Calendar Events", description = "What this controller does")
+@Tag(name = "Calendar Events", description = "This controller interacts with the Calandar table to display calandar events")
 public class CalendarEventController {
     private final CalendarEventRepository calendarEventRepository;
 
@@ -27,8 +27,8 @@ public class CalendarEventController {
 
     @GetMapping("/calendar_events")
     @Operation(
-        summary = "General idea of what this function does",
-        description = "more info about what this function does (maybe mention inputs and outputs generally)"
+        summary = "Retrives all of the calandar events",
+        description = "Takes in no input, and returns all of the rows in the calandar table"
     )
     public Iterable<CalendarEvent> getAllCalendarEvents(){
         //     OUTPUT: all calendar events
@@ -37,6 +37,10 @@ public class CalendarEventController {
     }
 
     @PutMapping("/calendar_events/search")
+    @Operation(
+        summary = "Filters through the calandar events based on specified values",
+        description = "Takes in a JSON array, where each element is a Filter object consisting of the column to filter by, the operation to filter based on, and the desired value, and returns all of the rows in the calandar table which match the Filter objects"
+    )
     public Iterable<CalendarEvent> filterCalendarEvents(@RequestBody Filter[] filters){
         // filterCalendarEvents(filterArray[]) ???
         //     Take an array of column names and desired values, and output the selected SQL rows
@@ -100,6 +104,10 @@ public class CalendarEventController {
         return this.calendarEventRepository.findAll(spec);
     }
 
+    @Operation(
+        summary = "Adds a calandar event to the Calandar table",
+        description = "Takes in a JSON object and adds that CalandarEvent to the Calandar table. Returns the object on success"
+    )
     @PostMapping("/calendar_event")
     public CalendarEvent createCalendarEvent(@RequestBody CalendarEvent calendarEvent){
         // createCalendarEvent(name, location, start, end, creator, group, category): success
@@ -109,6 +117,10 @@ public class CalendarEventController {
         return this.calendarEventRepository.save(calendarEvent);
     }
 
+    @Operation(
+        summary = "Edits a calandar event in the Calandar table",
+        description = "Takes in a JSON object and the id of the event to edit, and edits that CalandarEvent in the Calandar table with the new values provided. Returns the object on success"
+    )
     @PutMapping("/calendar_event/edit_{id}")
     public CalendarEvent editCalendarEvent(@PathVariable("id") Integer id, @RequestBody CalendarEvent calendarEvent){
         // editCalendarEvent(id, editArray[]): success
@@ -150,6 +162,10 @@ public class CalendarEventController {
            
     }
 
+    @Operation(
+        summary = "Deletes an event from the Calandar table",
+        description = "Modifies the deleted column of the calandar event based on the id provided to be 1"
+    )
     @PutMapping("/calendar_event/delete_{id}")
     public CalendarEvent deleteCalendarEvent(@PathVariable("id") Integer id){
         // deleteCalendarEvent(id): success

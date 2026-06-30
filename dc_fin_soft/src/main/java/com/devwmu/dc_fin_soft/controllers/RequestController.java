@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import com.devwmu.dc_fin_soft.entities.Request;
 import com.devwmu.dc_fin_soft.repositories.RequestRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -21,12 +23,20 @@ public class RequestController {
   }
 
     @GetMapping("/requests")
+    @Operation(
+        summary = "Retrives all of the requests",
+        description = "Takes in no input, and returns all of the rows in the Requests table"
+    )
     public Iterable<Request> getAllRequests() {   
         //      OUTPUT: all of the requests
 
         return this.requestRepository.findAll();
     }
     @PutMapping("/requests/search")
+    @Operation(
+        summary = "Filters through the requests based on specified values",
+        description = "Takes in a JSON array, where each element is a Filter object consisting of the column to filter by, the operation to filter based on, and the desired value, and returns all of the rows in the Requests table which match the Filter objects"
+    )
     public Iterable<Request> filterRequests(@RequestBody Filter[] filters){
         // custom
         // filterRequests(filterArray[]) ? 
@@ -117,6 +127,10 @@ public class RequestController {
     }
 
     @PostMapping("/request")
+    @Operation(
+        summary = "Adds a request to the Requests table",
+        description = "Takes in a JSON object and adds that Request to the Requests table. Returns the object on success"
+    )
     public Request createRequest(@RequestBody Request request){
         // createRequest(name, community, username, itemName, quantity, pricePerUnit, deadline, purpose): bool
         //     Creates a new entry in the club requests table
@@ -126,6 +140,10 @@ public class RequestController {
     }
 
     @PutMapping("/request/edit_{id}")
+    @Operation(
+        summary = "Edits a request in the Requests table",
+        description = "Takes in a JSON object and the id of the event to edit, and edits that Request in the Requests table with the new values provided. Returns the object on success"
+    )
     public Request editRequest(@PathVariable("id") Integer id, @RequestBody Request request){
         // editRequest(id, request): bool
         //     The id of the request and the updated request
@@ -168,6 +186,10 @@ public class RequestController {
     }
 
     @PutMapping("/request/delete_{id}")
+    @Operation(
+        summary = "Deletes an event from the Requests table",
+        description = "Modifies the deleted column of the request based on the id provided to be 1"
+    )
     public Request deleteRequest(@PathVariable("id") Integer id){
         // deleteRequest(id): bool
         //     The id of the request to be deleted (will just set deleted to 1)
@@ -183,6 +205,10 @@ public class RequestController {
 
 
     @PutMapping("/request/approve_{id}")
+    @Operation(
+        summary = "Toggles the approved flag for an event",
+        description = "Using the id provided, it will toggle the approved flag for an expense to either 1 or 0"
+    )
     public Request approveRequest(@PathVariable("id") Integer id){
         // approveRequest(id, decision) bool: 
         //     will mark a request as approved/disapproved in the club requests table

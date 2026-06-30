@@ -1,6 +1,9 @@
 package com.devwmu.dc_fin_soft.controllers;
 import com.devwmu.dc_fin_soft.repositories.ExpenseRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
@@ -11,6 +14,7 @@ import com.devwmu.dc_fin_soft.entities.Expense;
 
 @RestController
 @RequestMapping("/expense")
+@Tag(name = "Expense Controller", description = "This controller interacts with the expense table in various ways")
 public class ExpenseController {
     private final ExpenseRepository expenseRepository;
 
@@ -19,6 +23,10 @@ public class ExpenseController {
     }
 
     @GetMapping("/expenses")
+    @Operation(
+        summary = "Retrieves all of the expenses",
+        description = "Takes in no input, and returns all of the rows in the Expense table"
+    )
     public Iterable<Expense> getAllExpenses (){
         //     OUTPUT: all expenses
 
@@ -26,6 +34,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/expenses/search")
+    @Operation(
+        summary = "Filters through expenses based on specified values",
+        description = "Takes in a JSON array, where each element is a Filter object consisting of the column to filter by, the operation to filter based on, and the desired value, and returns all of the rows in the Expenses table which match the Filter objects"
+    )
     public Iterable<Expense> filterExpenses(@RequestBody Filter[] filters){
         // filterExpenses(filterArray[]) ?
         //     Take an array of column names and the desired value, and output the selected SQL rows
@@ -88,6 +100,10 @@ public class ExpenseController {
     }
 
     @PostMapping("/item")
+    @Operation(
+        summary = "Adds an event to the Expenses table",
+        description = "Takes in a JSON object and adds that Expense to the Expenses table. Returns the object on success"
+    )
     public Expense budgetItem(@RequestBody Expense expense){
         // budgetItem(name, qty, pricePerUnit, totalPrice, purpose, vendor, foodFlag, eventID, source, link, deadline, community, payment_type, pickup_location) bool
         //     Takes in info to create an entry in the Expenses table and outputs if successful
@@ -97,6 +113,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/edit_{id}")
+    @Operation(
+        summary = "Edits an expense in the Expenses table",
+        description = "Takes in a JSON object and the id of the expense to edit, and edits that expense in the Expenses table with the new values provided. Returns the object on success"
+    )
     public Expense editItem(@PathVariable("id") Integer id, @RequestBody Expense expense){
         // editItem(id, editArray[]): bool
         //     The ID of the item and the array of columns to be changed
@@ -188,6 +208,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/food_flag_id={id}_num={num}")
+    @Operation(
+        summary = "Toggles the feeFlag for an expense",
+        description = "Using the id provided, it will toggle the foodFlag for an expense to either 1 or 0"
+    )
     public Expense FoodFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -209,6 +233,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/requested_flag_id={id}_num={num}")
+    @Operation(
+        summary = "Toggles the requestedFlag for an expense",
+        description = "Using the id provided, it will toggle the requestedFlag for an expense to either 1 or 0"
+    )
     public Expense requestedFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -230,6 +258,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/s_buying_flag_id={id}_num={num}")
+    @Operation(
+        summary = "Toggles the startedBuyingFlag for an expense",
+        description = "Using the id provided, it will toggle the startedBuyingFlag for an expense to either 1 or 0"
+    )
     public Expense sBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -251,6 +283,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/f_buying_flag_id={id}_num={num}")
+    @Operation(
+        summary = "Toggles the finishedBuyingFlag for an expense",
+        description = "Using the id provided, it will toggle the finishedBuyingFlag for an expense to either 1 or 0"
+    )
     public Expense fBuyingFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -272,6 +308,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/picked_up_flag_id={id}_num={num}")
+    @Operation(
+        summary = "Toggles the pickedUpFlag for an expense",
+        description = "Using the id provided, it will toggle the pickedUpFlag for an expense to either 1 or 0"
+    )
     public Expense pickedUpFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -293,6 +333,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/reimbursed_flag_id={id}_num={num}")
+    @Operation(
+        summary = "Toggles the reimbursedFlag for an expense",
+        description = "Using the id provided, it will toggle the reimbursedFlag for an expense to either 1 or 0"
+    )
     public Expense reimbursedFlagItem(@PathVariable("id") Integer id, @PathVariable("num") Integer num) {
         // deleteItem(id): bool
         //     The id of the item to be updates (from display, not database)
@@ -314,6 +358,10 @@ public class ExpenseController {
     }
 
     @PutMapping("/item/delete_{id}")
+    @Operation(
+        summary = "Deletes an expense from the Expenses table",
+        description = "Modifies the deleted column of the expense based on the id provided to be 1"
+    )
     public Expense deleteItem(@PathVariable("id") Integer id) {
         // deleteItem(id): bool
         //     The id of the item to be deleted (from display, not database)

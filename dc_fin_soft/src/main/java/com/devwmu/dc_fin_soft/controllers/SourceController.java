@@ -2,6 +2,10 @@ package com.devwmu.dc_fin_soft.controllers;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import com.devwmu.dc_fin_soft.repositories.SourceRepository;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import com.devwmu.dc_fin_soft.entities.Source;
 
 import java.util.Optional;
@@ -10,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin/sources")
+@Tag(name = "Sources", description = "This controller interacts with the sources table in various ways")
 public class SourceController {
     private final SourceRepository sourceRepository;
 
@@ -17,6 +22,10 @@ public class SourceController {
     this.sourceRepository = sourceRepository;
   }
     @GetMapping("/sources")
+    @Operation(
+        summary = "Retrives all of the sources",
+        description = "Takes in no input, and returns all of the rows in the Sources table"
+    )
     public Iterable<Source> getAllSources() {   
         //      OUTPUT: all of the sources
 
@@ -24,6 +33,10 @@ public class SourceController {
     }
 
     @PutMapping("/sources/search")
+    @Operation(
+        summary = "Filters through the sources based on specified values",
+        description = "Takes in a JSON array, where each element is a Filter object consisting of the column to filter by, the operation to filter based on, and the desired value, and returns all of the rows in the Sources table which match the Filter objects"
+    )
     public Iterable<Source> filterSources(@RequestBody Filter[] filters) {
         // custom
         // filterSources(filterArray[]) ?
@@ -99,6 +112,10 @@ public class SourceController {
     }
 
     @PostMapping("/source")
+    @Operation(
+        summary = "Adds a source to the Sources table",
+        description = "Takes in a JSON object and adds that Request to the Sources table. Returns the object on success"
+    )
     public Source createSource(@RequestBody Source source){
         return this.sourceRepository.save(source);
         // createSource(name, cap, type, internal): bool
@@ -107,6 +124,10 @@ public class SourceController {
     }
 
     @PutMapping("/source/edit_{id}")
+    @Operation(
+        summary = "Edits a source in the Sources table",
+        description = "Takes in a JSON object and the id of the event to edit, and edits that Source in the Sources table with the new values provided. Returns the object on success"
+    )
     public Source editSource(@PathVariable("id") Integer id, @RequestBody Source source){
         // editSource((id, editArray[]): bool
         //     Edits columns of a source
@@ -147,6 +168,10 @@ public class SourceController {
     }
 
     @PutMapping("/source/delete_{id}")
+    @Operation(
+        summary = "Deletes a source from the Sources table",
+        description = "Modifies the deleted column of the source based on the id provided to be 1"
+    )
     public Source deleteSource(@PathVariable("id") Integer id){
         // deleteSource(sourceID): bool
         //     Deletes a source from the database

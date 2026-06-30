@@ -3,12 +3,17 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import com.devwmu.dc_fin_soft.entities.FinanceGroup;
 import com.devwmu.dc_fin_soft.repositories.FinanceGroupRepository;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.util.Optional;
 
 // Fix outputs and inputs
 
 @RestController
 @RequestMapping("/admin/groups")
+@Tag(name = "Finance Groups", description = "Controls the various finance groups and who is all in them")
 public class FinanceGroupController {
     private final FinanceGroupRepository financeGroupRepository;
 
@@ -16,11 +21,19 @@ public class FinanceGroupController {
     this.financeGroupRepository = financeGroupRepository;
   }
     @GetMapping("/finance_groups")
+    @Operation(
+        summary = "Retrives all of the finance groups",
+        description = "Takes in no input, and returns all of the rows in the Finance Group table"
+    )
     public Iterable<FinanceGroup> getAllFinanceGroups() {
         return this.financeGroupRepository.findAll();
     }
     
     @PutMapping("/finance_groups/search")
+    @Operation(
+        summary = "Filters through finance groups based on specified values",
+        description = "Takes in a JSON array, where each element is a Filter object consisting of the column to filter by, the operation to filter based on, and the desired value, and returns all of the rows in the Finance Group table which match the Filter objects"
+    )
     public Iterable<FinanceGroup> filterFinanceGroups(@RequestBody Filter[] filters){
     // custom
     // filterFinanceGroups(filterArray[]): Iterable<FinGroup> 	
@@ -69,6 +82,10 @@ public class FinanceGroupController {
     }
 
     @PutMapping("/finance_group_users/add_{user}")
+    @Operation(
+        summary = "Adds a user to a specific finance group",
+        description = "Modifies the finance group attribute of a user, using the id provided and the group name. Returns the user on success"
+    )
     public FinanceGroup addUserToGroup(){
         // custom
         // addUserToGroup(user, group): bool
@@ -81,6 +98,10 @@ public class FinanceGroupController {
     }
 
     @PutMapping("/finance_group_users/remove_{user}")
+    @Operation(
+        summary = "Deletes a user from a specific finance group",
+        description = "Modifies the finance group attribute of a user, using the id provided. Returns the user on success"
+    )
     public FinanceGroup removeUserFromGroup(){
         // custom
         // removeUserFromGroup(user, group): bool
@@ -93,6 +114,10 @@ public class FinanceGroupController {
     }
 
     @PostMapping("/finance_group")
+    @Operation(
+        summary = "Adds a new finance group",
+        description = "Takes in a JSON representation of a FinanceGroup object and adds it to the Finance Group table. Returns the FinanceGroup object on success"
+    )
     public FinanceGroup createGroup(@RequestBody FinanceGroup financeGroup){
         // createGroup(name): bool
         //     Creates a new finance group
@@ -101,6 +126,10 @@ public class FinanceGroupController {
     }
 
     @PutMapping("/finance_group_{id}")
+    @Operation(
+        summary = "Removes a finance group",
+        description = "Takes in the id of a Finance Group and sets the deleted column to 1. Returns the FinanceGroup object on success"
+    )
     public FinanceGroup removeGroup(@PathVariable("id") Integer id){
         // removeGroup(name): bool
         //     removes a group by its name

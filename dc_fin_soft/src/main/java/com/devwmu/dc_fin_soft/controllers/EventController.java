@@ -3,6 +3,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
 import com.devwmu.dc_fin_soft.entities.Event;
 import com.devwmu.dc_fin_soft.repositories.EventRepository;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -12,12 +16,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/event")
+@Tag(name = "Event Controller", description = "This controller interacts with the Event table in various ways")
 public class EventController {
     private final EventRepository eventRepository;
 
     public EventController(final EventRepository eventRepository) {
     this.eventRepository = eventRepository;
     }
+    @Operation(
+        summary = "Filters through events based on specified values",
+        description = "Takes in a JSON array, where each element is a Filter object consisting of the column to filter by, the operation to filter based on, and the desired value, and returns all of the rows in the Events table which match the Filter objects"
+    )
     @PutMapping("/events/search")
     public Iterable<Event> filterEvents(@RequestBody Filter[] filters){
         // filterEvents(filterArray[]) Iterable<Event>
@@ -105,12 +114,21 @@ public class EventController {
         }
         return this.eventRepository.findAll(spec);
     }
+
+    @Operation(
+        summary = "Retrives all of the events",
+        description = "Takes in no input, and returns all of the rows in the Events table"
+    )
     @GetMapping("/all_events")
     public Iterable<Event> getAllEvents() {
         return this.eventRepository.findAll();
     }
     
     @PostMapping("/event")
+    @Operation(
+        summary = "Adds an event to the Events table",
+        description = "Takes in a JSON object and adds that Event to the Events table. Returns the object on success"
+    )
     public Event createEvent(@RequestBody Event event){
         // createEvent(name, date, location, attendance, fee?, philanthropy?, conference?):
         //     Takes in info to create an entry in the Event table
@@ -120,6 +138,10 @@ public class EventController {
     }
 
     @PutMapping("/event/edit_{id}")
+    @Operation(
+        summary = "Edits a calandar event in the Events table",
+        description = "Takes in a JSON object and the id of the event to edit, and edits that Event in the Events table with the new values provided. Returns the object on success"
+    )
     public Event editEvent(@PathVariable("id") Integer id, @RequestBody Event event){
         // editEvent(id, editArray[]): bool
         //     The ID of the event and the array of columns to be changed
@@ -159,6 +181,10 @@ public class EventController {
     }
 
     @PutMapping("/event/fee_flag_id={id}_num={num}")
+    @Operation(
+        summary = "Toggles the feeFlag for an event",
+        description = "Using the id provided, it will toggle the feeFlag for an event to either 1 or 0"
+    )
     public Event feeFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
         // feeFlagEvent(id, num): bool
         //     The id of the item to change the fee flag (from database), and what to set it to
@@ -178,6 +204,10 @@ public class EventController {
     }
 
     @PutMapping("/event/phil_flag_id={id}_num=_{num}")
+    @Operation(
+        summary = "Toggles the philanthropyFlag for an event",
+        description = "Using the id provided, it will toggle the philanthropyFlag for an event to either 1 or 0"
+    )
     public Event philFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
         // feeFlagEvent(id, num): bool
         //     The id of the item to change the fee flag (from database), and what to set it to
@@ -196,6 +226,10 @@ public class EventController {
         return this.eventRepository.save(updateEvent);
     }
 
+    @Operation(
+        summary = "Toggles the conferenceFlag for an event",
+        description = "Using the id provided, it will toggle the conferenceFlag for an event to either 1 or 0"
+    )
     @PutMapping("/event/conf_flag_id={id}_num={num}")
     public Event confFlagEvent(@PathVariable("id") Integer id, @PathVariable("num") Integer num){
         // feeFlagEvent(id, num): bool
@@ -216,6 +250,10 @@ public class EventController {
     }
 
     @PutMapping("/event/delete_{id}")
+    @Operation(
+        summary = "Deletes an event from the Events table",
+        description = "Modifies the deleted column of the event based on the id provided to be 1"
+    )
     public Event deleteEvent(@PathVariable("id") Integer id){
         // deleteEvent(id): bool
         //     The id of the item to be deleted (from display, not database)
