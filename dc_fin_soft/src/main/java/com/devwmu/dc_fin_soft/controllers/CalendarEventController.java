@@ -1,7 +1,11 @@
 package com.devwmu.dc_fin_soft.controllers;
 import com.devwmu.dc_fin_soft.DcFinSoftApplication;
-import com.devwmu.dc_fin_soft.repositories.CalendarRepository;
+import com.devwmu.dc_fin_soft.repositories.CalendarEventRepository;
+
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.Optional;
 
 import com.devwmu.dc_fin_soft.entities.CalendarEvent;
@@ -13,20 +17,87 @@ import com.devwmu.dc_fin_soft.entities.CalendarEvent;
 
 @RestController
 @RequestMapping("/calendar")
+@Tag(name = "Calendar Events", description = "What this controller does")
 public class CalendarEventController {
-    private final CalendarRepository calendarRepository;
+    private final CalendarEventRepository calendarEventRepository;
 
-    CalendarEventController(CalendarRepository calendarRepository, RequestController requestController, DcFinSoftApplication dcFinSoftApplication) {
-        this.calendarRepository = calendarRepository;
+    CalendarEventController(CalendarEventRepository calendarEventRepository, RequestController requestController, DcFinSoftApplication dcFinSoftApplication) {
+        this.calendarEventRepository = calendarEventRepository;
     }
 
-    @GetMapping("/calendar_events/search")
-    public CalendarEvent filterCalendarEvents(){
+    @GetMapping("/calendar_events")
+    @Operation(
+        summary = "General idea of what this function does",
+        description = "more info about what this function does (maybe mention inputs and outputs generally)"
+    )
+    public Iterable<CalendarEvent> getAllCalendarEvents(){
+        //     OUTPUT: all calendar events
+
+        return this.calendarEventRepository.findAll();
+    }
+
+    @PutMapping("/calendar_events/search")
+    public Iterable<CalendarEvent> filterCalendarEvents(@RequestBody Filter[] filters){
         // filterCalendarEvents(filterArray[]) ???
         //     Take an array of column names and desired values, and output the selected SQL rows
         //     OUTPUT: calendar events
 
-        return new CalendarEvent();
+        // returns the events that match
+        Specification<CalendarEvent> spec = Specification.unrestricted();
+        for (Filter filter: filters){
+            String col = filter.getCol();
+            String op = filter.getOp().toLowerCase();
+            Object value = filter.getVal();
+
+            if (value == null){
+                continue;
+            }
+
+            Specification<CalendarEvent> condition = null;
+            switch (op) {
+                case "like":
+                    try{
+                        String lower = "%" + value.toString().toLowerCase() + "%";
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.like(criteraBuilder.lower(root.get(col)), lower);
+                        break;
+                    }
+                    catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "leq": 
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.lessThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "geq":
+                    try{
+                        Integer val = (Integer) value;
+                        condition =  (root, query, criteraBuilder) ->
+                            criteraBuilder.greaterThanOrEqualTo(root.get(col), val);
+                        break;
+                    } catch (ClassCastException e){
+                        System.out.println(e + "\n\n\n");
+                        break;
+                    }
+                case "eq":
+                    condition = (root, query, criteriaBuilder) -> 
+                        criteriaBuilder.equal(root.get(col), value);
+                    break;
+            }
+            
+            if (condition != null){
+                spec = spec.and(condition);
+            }
+
+        }
+        return this.calendarEventRepository.findAll(spec);
     }
 
     @PostMapping("/calendar_event")
@@ -35,7 +106,7 @@ public class CalendarEventController {
         //     Uses the input info to enter a calendar event into the database
         //     OUTPUT: success or not
 
-        return this.calendarRepository.save(calendarEvent);
+        return this.calendarEventRepository.save(calendarEvent);
     }
 
     @PutMapping("/calendar_event/edit_{id}")
@@ -43,7 +114,7 @@ public class CalendarEventController {
         // editCalendarEvent(id, editArray[]): success
         //     The ID of the calendar event and the array of columns to be changed
         //     OUTPUT: success or not
-        Optional<CalendarEvent> calendarEventToUpdateOptional = this.calendarRepository.findById(id);
+        Optional<CalendarEvent> calendarEventToUpdateOptional = this.calendarEventRepository.findById(id);
         if(!calendarEventToUpdateOptional.isPresent()){
             return null;
         }
@@ -75,24 +146,24 @@ public class CalendarEventController {
             calendarEventToUpdate.setDeleted(calendarEvent.getDeleted());
         }
         
-        return this.calendarRepository.save(calendarEventToUpdate);
+        return this.calendarEventRepository.save(calendarEventToUpdate);
            
     }
 
-    @DeleteMapping("/calendar_event/delete_{id}")
+    @PutMapping("/calendar_event/delete_{id}")
     public CalendarEvent deleteCalendarEvent(@PathVariable("id") Integer id){
         // deleteCalendarEvent(id): success
         //     The id of the calendar event to be deleted (from display, not database)
         //     OUTPUT: success or not
 
-        Optional<CalendarEvent> calendarEventToDeleteOptional = this.calendarRepository.findById(id);
+        Optional<CalendarEvent> calendarEventToDeleteOptional = this.calendarEventRepository.findById(id);
         if (!calendarEventToDeleteOptional.isPresent()){
             return null;
         }
         CalendarEvent calendarEvent = calendarEventToDeleteOptional.get();
         calendarEvent.setDeleted(1);
         
-        return this.calendarRepository.save(calendarEvent);     
+        return this.calendarEventRepository.save(calendarEvent);     
     }
 
     @PostMapping("/reimbursement_deadline_soon")
